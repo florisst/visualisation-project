@@ -15,7 +15,7 @@ de Bosbaan, beinvloedbaar door de wind.
 
 ##Verschillende onderdelen##
 
-![]doc/schets.jpg
+![schets zou hier zichtbaar moeten zijn](doc/schets.jpg)
 
 1. HTML pagina
   * Met CSS file
