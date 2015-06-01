@@ -10,9 +10,13 @@ In de roeiwereld wordt veel gepraat over zogeheten "voordeellanen", waar je voor
 De site van de Willem-Alexander baan zegt zelf:
 "De roeibaan als geheel ligt open onder de hemel, alleen omringd door kleine rietlanden. De wind heeft er weliswaar vrij spel, maar treft alle banen even hard. Het maakt de Willem Alexander Baan tot een eerlijke wedstrijdbaan."
 
-Ik ben benieuwd in hoeverre dit correct is. Is de Willem-Alexander baan echt zo eerlijk als dat ze zelf beweren of is de baan in feite, net als de Bosbaan, beinvloedbaar door de wind.
+Ik ben benieuwd in hoeverre dit correct is. Is de Willem-Alexander baan echt zo eerlijk als dat ze zelf beweren of is de baan in feite, net als
+de Bosbaan, beinvloedbaar door de wind.
 
 ##Verschillende onderdelen##
+
+![]doc/schets.jpg
+
 1. HTML pagina
   * Met CSS file
   * Baan kaart bovenaan (statisch)
@@ -25,10 +29,14 @@ Ik ben benieuwd in hoeverre dit correct is. Is de Willem-Alexander baan echt zo 
   * Kies veld (een specifiek roei-veld of alle velden)
 4. Grafiek die weergeeft in welke laan de winnende ploeg lag, per heat.
 
+##platform and external components##
+Een HTML pagina zal worden gemaakt waar d3 en Javascript zullen worden gebruikt om een visualisatie zichtbaar te maken.
+
 ##Benodigde data##
 Om de vraag te kunnen beantwoorden hoe eerlijk de Willem-Alexander baan nou is moet er natuurlijk weersdata zijn en roeiuitslagen nodig
 
-De weersdata zal worden gedownload van http://www.knmi.nl/climatology/daily_data/selection.cgi voor weersstation Rotterdam waar de Richting van de wind en de snelheid de belangrijkste variabelen zijn.  
+De weersdata zal worden gedownload van http://www.knmi.nl/climatology/daily_data/selection.cgi voor weersstation Rotterdam waar de Richting van
+de wind en de snelheid de belangrijkste variabelen zijn.  
 1.	23 & 24 mei 2015 (Westelijke)
 2.	 2 &  3 mei 2015 (Damen 2015)
 3.	 3 &  4 mei 2014 (Damen 2014).
@@ -44,4 +52,6 @@ hebben die kan worden gebruikt voor visuele eigenschappen.
 Uiteindelijke visualisatie zal met behulp van D3 gemaakt worden en dus zal de data waarschijnlijk omgezet worden in JSON formaat.
 
 ##Mogelijke problemen##
-Keuze menu voor de wedstrijden, de dag en het veld.
+Missende data.
+moeilijkheid in Keuze menu voor de wedstrijden, de dag en het veld.
+
