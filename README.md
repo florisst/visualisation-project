@@ -11,6 +11,18 @@ De site van de Willem-Alexander baan zegt zelf:
 
 Ik ben benieuwd in hoeverre dit correct is. Is de Willem-Alexander baan echt zo eerlijk als dat ze zelf beweren of is de baan in feite, net als de Bosbaan, beinvloedbaar door de wind.
 
+##Verschillende onderdelen##
+1. HTML pagina
+  * Met CSS file
+  * Baan kaart bovenaan
+2. Windroos
+  * windrichting van de dag. 
+3. Keuze menu voor verschillende velden
+  * Kies wedstrijd (Westelijke 2015/Damen 2015/ Damen 2014)
+  * Kies dag (Zaterdag/Zondag)
+  * Kies veld (een specifiek roei-veld of alle velden)
+4. Grafiek die weergeeft in welke laan de winnende ploeg lag, per heat.
+
 ##Benodigde data##
 Om de vraag te kunnen beantwoorden hoe eerlijk de Willem-Alexander baan nou is moet er natuurlijk weersdata zijn en roeiuitslagen nodig
 De roeiuitslagen zullen worden gescraped van time-team.nl
