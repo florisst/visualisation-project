@@ -32,7 +32,7 @@ def scrape_heats(heat_urls):
         #for i, url in enumerate(dag):
             # Grab web page
         heat = []
-        for i in range (0,4):
+        for i in range (0,10):
             url = dag[i]    
             heat_html = URL(url).download(cached=True)
             # Extract relevant information for each movie
@@ -45,8 +45,18 @@ def scrape_heats(heat_urls):
             field = str(discription[8:])
             
             # Extract results from the heat, divided into: crew, lane and 500m/1000m/1500m/2000m: time/position.
-            
-
+            results = []
+            rows = chart.by_tag("tr")[2:]
+            for j in range(0, len(rows), 2):
+                row = rows[j]
+                crew = row.by_tag("td")[2].by_tag("a")[0].content
+                print crew
+                if (len(chart.by_tag("tr")[1]) > 9):
+                    lane = row.by_tag("td")[4].content
+                else:
+                    lane = row.by_tag("td")[3].content
+                print lane
+                
             heat.append(day)
             heat.append(time)
             heat.append(field)
