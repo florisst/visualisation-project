@@ -15,7 +15,7 @@ Ik ben benieuwd in hoeverre dit correct is. Is de Willem-Alexander baan echt zo 
 de Bosbaan, beinvloedbaar door de wind.
 
 ##Verschillende onderdelen##
-
+Schets van de hoofd visualisatie
 ![dag grafiek](doc/schets_dag.jpg)
 
 1. HTML pagina
@@ -37,7 +37,7 @@ Als de muis over een punt in de scater plot gaat zal een tooltip verschijnen waa
 
 
 ##platform and external components##
-Een HTML pagina zal worden gemaakt waar d3 en Javascript zullen worden gebruikt om een visualisatie zichtbaar te maken.
+Een HTML pagina zal worden gemaakt waar d3 en Javascript zullen worden gebruikt om een visualisatie zichtbaar te maken. De hoofd visualisatie zal een scatterplot zijn waarbij elk bolletje een gefinishte ploeg voorstelt. De verschillende wedstrijd lanen zullen worden uitgezet zodat snel kan worden gezien in welke laan het meest is gewonnen over de hele dag gezien (zie de schets van de hoofd visualisatie).
 
 ##Benodigde data##
 Om de vraag te kunnen beantwoorden hoe eerlijk de Willem-Alexander baan nou is moet er natuurlijk weersdata zijn en roeiuitslagen nodig
