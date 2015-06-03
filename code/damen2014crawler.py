@@ -28,38 +28,38 @@ def scrape_heat_urls(dom):
 def scrape_heats(heat_urls):
     heats = []
     for index in range(0,2):
-        dag = heat_urls[index] # LET OP 0 moet hier i worden!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        #for i, url in enumerate(dag):
-            # Grab web page
-        for i in range (0,10):
-            url = dag[i]    
+        dag = heat_urls[index]
+        for i, url in enumerate(dag):
+        #for i in range (0,10):
+        #    url = dag[i]    
             heat_html = URL(url).download(cached=True)
             # Extract relevant information for each movie
             heat_dom = DOM(heat_html)
+            print url
             chart = heat_dom.by_tag("div")[8]
+            print chart
             # Extract discriptional data from the heat
             discription = chart.by_tag("h2")[0].content 
             day = str((discription[:3]))
             time = str(discription[3:8])
             field = str(discription[8:])
-            print discription
-            # Extract results from the heat, divided into: crew, lane and 500m/1000m/1500m/2000m: time/position.
+            
+            # Extract results from the heat, divided into: crew: lane and 500m/1000m/1500m/2000m: time/position.
             rows = chart.by_tag("tr")[2:]
-            heat = []
             for j in range(0, len(rows), 2):
-                
+                heat = []
                 row = rows[j]
                 # Skip crews who did not start the race.
-                if (row.by_tag("td")[0].content != "" and row.by_tag("td")[0].content != "."):
-                    
+                if (row.by_tag("td")[0].content != "" and row.by_tag("td")[0].content != "."):   
                     crew = row.by_tag("td")[2].by_tag("a")[0].content
-                    print crew
                     k = 3
                     # some pages have an extra td element with irrelevant data, so we increment k by one.
                     if (len(chart.by_tag("tr")[1]) > 9):
                         k += 1
                     lane = row.by_tag("td")[k].content
                     k += 1
+                    
+                    # Results are divided in 500m, 1000m, 1500m and finish. all points have a time and a position value.
                     interval = {}
                     interval_500 = {}
                     interval["500m"] = interval_500
@@ -79,7 +79,6 @@ def scrape_heats(heat_urls):
                     interval["1500m"] = interval_1500
                     interval_1500["time"] = row.by_tag("td")[k].content
                     k += 1
-                    print interval_1500["time"]
                     interval_1500["position"] = row.by_tag("td")[k].content
                     k += 1
                     
@@ -89,12 +88,13 @@ def scrape_heats(heat_urls):
                     k += 1
                     finish["position"] = row.by_tag("td")[k].content
                 results = {}
-                results["results"] = interval
-            heat.append(day)
-            heat.append(time)
-            heat.append(field)
-            heat.append(results)
-            heats.append(heat)
+                results["results"] = interval    
+                heat.append(day)
+                heat.append(time)
+                heat.append(field)
+                heat.append(crew)
+                heat.append(results)
+                heats.append(heat)
 
     return heats
 

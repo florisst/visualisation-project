@@ -7,8 +7,8 @@ This script scrapes the time-team.nl website and outputs results in a JSON file 
 import csv, json
 from pattern.web import URL, DOM, plaintext, abs
 
-TARGET_URL = "http://regatta.time-team.nl/raceroei/2014/results/heats.php"
-OUTPUT_JSON = "damen2014.json"
+TARGET_URL = "http://regatta.time-team.nl/raceroei/2015/results/heats.php"
+OUTPUT_JSON = "damen2015.json"
 
 def scrape_heat_urls(dom):
     days = []
@@ -29,10 +29,9 @@ def scrape_heats(heat_urls):
     heats = []
     for index in range(0,2):
         dag = heat_urls[index] # LET OP 0 moet hier i worden!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        #for i, url in enumerate(dag):
-            # Grab web page
-        for i in range (0,10):
-            url = dag[i]    
+        for i, url in enumerate(dag):
+        #for i in range (0,10):
+        #    url = dag[i]    
             heat_html = URL(url).download(cached=True)
             # Extract relevant information for each movie
             heat_dom = DOM(heat_html)
@@ -42,18 +41,15 @@ def scrape_heats(heat_urls):
             day = str((discription[:3]))
             time = str(discription[3:8])
             field = str(discription[8:])
-            print discription
+            
             # Extract results from the heat, divided into: crew, lane and 500m/1000m/1500m/2000m: time/position.
             rows = chart.by_tag("tr")[2:]
-            heat = []
             for j in range(0, len(rows), 2):
-                
+                heat = []
                 row = rows[j]
                 # Skip crews who did not start the race.
-                if (row.by_tag("td")[0].content != "" and row.by_tag("td")[0].content != "."):
-                    
+                if (row.by_tag("td")[0].content != ""):
                     crew = row.by_tag("td")[2].by_tag("a")[0].content
-                    print crew
                     k = 3
                     # some pages have an extra td element with irrelevant data, so we increment k by one.
                     if (len(chart.by_tag("tr")[1]) > 9):
@@ -79,7 +75,6 @@ def scrape_heats(heat_urls):
                     interval["1500m"] = interval_1500
                     interval_1500["time"] = row.by_tag("td")[k].content
                     k += 1
-                    print interval_1500["time"]
                     interval_1500["position"] = row.by_tag("td")[k].content
                     k += 1
                     
@@ -90,11 +85,12 @@ def scrape_heats(heat_urls):
                     finish["position"] = row.by_tag("td")[k].content
                 results = {}
                 results["results"] = interval
-            heat.append(day)
-            heat.append(time)
-            heat.append(field)
-            heat.append(results)
-            heats.append(heat)
+                heat.append(day)
+                heat.append(time)
+                heat.append(field)
+                heat.append(crew)
+                heat.append(results)
+                heats.append(heat)
 
     return heats
 
