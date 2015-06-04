@@ -42,7 +42,7 @@ Een HTML pagina zal worden gemaakt waar d3 en Javascript zullen worden gebruikt 
 ##Benodigde data##
 Om de vraag te kunnen beantwoorden hoe eerlijk de Willem-Alexander baan nou is moet er natuurlijk weersdata zijn en roeiuitslagen nodig
 
-De weersdata zal worden gedownload van http://www.knmi.nl/climatology/daily_data/selection.cgi voor weersstation Rotterdam waar de Richting van
+De weersdata zal worden gedownload van http://www.knmi.nl/klimatologie/uurgegevens/selectie.cgi voor weersstation Rotterdam waar de Richting van
 de wind en de snelheid de belangrijkste variabelen zijn.  
   1.	23 & 24 mei 2015 (Westelijke)
   2.	 2 &  3 mei 2015 (Damen 2015)
