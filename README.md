@@ -3,7 +3,7 @@ Dit is mijn inzending voor het vak Programmeerproject 2015.
 Floris Stevens. 	
 10182195
 
-##idee##
+##Idee##
 
 ####Hoe eerlijk is de Willem-Alexander baan?####
 In de roeiwereld wordt veel gepraat over zogeheten "voordeellanen", waar je voordeel zou kunnen ondervinden van de wind en/of stroming, waar je in een andere laan op de roeibaan dit voordeel niet hebt en zelfs een nadeel zou kunnen hebben.  Recent is er een nieuwe roeibaan in Nederland aangelegt, de Willem-Alexander baan. Deze baan is niet alleen qua faciliteiten een verbetering op de in Amsterdam gelegen Bosbaan, hij zou ook een stuk eerlijker zijn dan laatstgenoemde. Van de Bosbaan wordt gezegd dat het weer zeer veel invloed heeft op de stroming van het water in de  verschillende lanen, bij de nieuwe Willem-Alexanderbaan zou dit niet zo'n effect hebben.
@@ -36,7 +36,7 @@ Als de muis over een punt in de scater plot gaat zal een tooltip verschijnen waa
 ![veld grafiek](doc/schets_veld.jpg)
 
 
-##platform and external components##
+##Platform en externe componenten##
 Een HTML pagina zal worden gemaakt waar d3 en Javascript zullen worden gebruikt om een visualisatie zichtbaar te maken. De hoofd visualisatie zal een scatterplot zijn waarbij elk bolletje een gefinishte ploeg voorstelt. De verschillende wedstrijd lanen zullen worden uitgezet zodat snel kan worden gezien in welke laan het meest is gewonnen over de hele dag gezien (zie de schets van de hoofd visualisatie).
 
 ##Benodigde data##
