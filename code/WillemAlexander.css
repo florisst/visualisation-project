@@ -1,0 +1,165 @@
+
+/* http://meyerweb.com/eric/tools/css/reset/ 2. v2.0 | 20110126
+  License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  /*width: 1000px;
+  height: 2000px;
+  */
+  background-color: #47D147;
+
+}
+
+
+#title{
+  text-align: center;
+  position: fixed;
+  width: 60%;
+  left: 10%;
+  right: 20%;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  margin: 1% 10% 5%;
+
+}
+
+#menu{
+  position: absolute;
+  top: 10%;
+  margin: 5%;
+}
+
+#nav, #nav ul {
+padding: 3px 0 0 0;
+margin: 0;
+list-style: none;
+}
+
+#nav li {
+float: left;
+width: 150px;
+}
+
+#nav ul {
+position: absolute;
+width: 150px;
+left: -1000px;
+}
+
+#nav li:hover ul, #nav li.ie_does_hover ul {
+left: auto;
+background-position: 0 0;
+}
+
+#nav a {
+display: block;
+margin: 1%;
+text-decoration: none;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+font-size: 1em;
+}
+
+ul a{
+font-weight: bold;
+color: #0099FF;
+cursor: default;
+text-align: center;
+}
+
+ul ul a:link, ul ul a:visited{
+font-weight: normal;
+color: #0099FF;
+cursor: pointer;
+}
+
+ul ul a:hover, ul ul a:active{
+font-weight: normal;
+color: #FFF;
+cursor: pointer;
+}
+
+ul li{
+background-color: #89E189;
+border-left: 3px solid #47D147;
+}
+
+ul ul li{
+background-color: #89E189;
+border-top: 3px solid #47D147;
+border-left: 0;
+}
+
+#static_images{
+  width: 30%;
+  height: 50%;
+  position: absolute;
+  right: 1%;
+  margin: 5%;
+}
+#static_images #kompas{
+  position: absolute;
+  top: 1%;
+  left: auto;
+  width: 50%;
+  height: 50%;
+  margin: 5%;
+}
+#static_images #baan{
+  position: absolute;
+  top: 1%;
+  left: 50%;
+  width: 50%;
+  height: 70%;
+  margin: 5%;
+}
+#svg {
+  background-color: white;
+}
+.svg {
+  background-color: white;
+}
