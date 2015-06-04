@@ -24,6 +24,7 @@ Optioneel toe te voegen is:
     3. de 1000m tijd en positie
     4. de 1500m tijd en positie
     5. de 2000m tijd en positie
+
 ##Uitgebreide schets##
 ![](doc/uitgebreide_schets.jpg)
 
