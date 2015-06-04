@@ -35,9 +35,7 @@ def scrape_heats(heat_urls):
             heat_html = URL(url).download(cached=True)
             # Extract relevant information for each movie
             heat_dom = DOM(heat_html)
-            print url
             chart = heat_dom.by_tag("div")[8]
-            print chart
             # Extract discriptional data from the heat
             discription = chart.by_tag("h2")[0].content 
             day = str((discription[:3]))
@@ -50,7 +48,12 @@ def scrape_heats(heat_urls):
                 heat = []
                 row = rows[j]
                 # Skip crews who did not start the race.
-                if (row.by_tag("td")[0].content != "" and row.by_tag("td")[0].content != "."):   
+                try:
+                    result = row.by_tag("td")[0].content
+                except IndexError:
+                    j +=1
+                    continue 
+                if (result != "" and result != "." ):   
                     crew = row.by_tag("td")[2].by_tag("a")[0].content
                     k = 3
                     # some pages have an extra td element with irrelevant data, so we increment k by one.
@@ -58,7 +61,7 @@ def scrape_heats(heat_urls):
                         k += 1
                     lane = row.by_tag("td")[k].content
                     k += 1
-                    
+                
                     # Results are divided in 500m, 1000m, 1500m and finish. all points have a time and a position value.
                     interval = {}
                     interval_500 = {}
@@ -67,33 +70,34 @@ def scrape_heats(heat_urls):
                     k += 1
                     interval_500["position"] = row.by_tag("td")[k].content
                     k += 1
-                    
+                        
                     interval_1000 = {}
                     interval["1000m"] = interval_1000
                     interval_1000["time"] = row.by_tag("td")[k].content
                     k += 1
                     interval_1000["position"] = row.by_tag("td")[k].content
                     k += 1
-                    
+                        
                     interval_1500 = {}
                     interval["1500m"] = interval_1500
                     interval_1500["time"] = row.by_tag("td")[k].content
                     k += 1
                     interval_1500["position"] = row.by_tag("td")[k].content
                     k += 1
-                    
+                
                     finish = {}
                     interval["finish"] = finish
                     finish["time"] = row.by_tag("td")[k].content
                     k += 1
                     finish["position"] = row.by_tag("td")[k].content
-                results = {}
-                results["results"] = interval    
-                heat.append(day)
-                heat.append(time)
-                heat.append(field)
-                heat.append(crew)
-                heat.append(results)
+
+                    results = {}
+                    results["results"] = interval    
+                    heat.append(day)
+                    heat.append(time)
+                    heat.append(field)
+                    heat.append(crew)
+                    heat.append(results)
                 heats.append(heat)
 
     return heats
