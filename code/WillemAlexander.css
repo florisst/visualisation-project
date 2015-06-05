@@ -58,12 +58,12 @@ body {
 
 #title{
   text-align: center;
-  position: fixed;
+  position: absolute;
   width: 60%;
   left: 10%;
   right: 20%;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 25px;
+  font-size: 35px;
   margin: 1% 10% 5%;
 
 }
@@ -82,12 +82,12 @@ list-style: none;
 
 #nav li {
 float: left;
-width: 150px;
+width: 200px;
 }
 
 #nav ul {
 position: absolute;
-width: 150px;
+width: 200px;
 left: -1000px;
 }
 
@@ -124,24 +124,24 @@ cursor: pointer;
 }
 
 ul li{
-background-color: #89E189;
+background-color: #A1E7A1;
 border-left: 3px solid #47D147;
 }
 
 ul ul li{
-background-color: #89E189;
+background-color: #A1E7A1;
 border-top: 3px solid #47D147;
 border-left: 0;
 }
 
 #static_images{
-  width: 30%;
-  height: 50%;
+  width: 500px;
+  height: 500px;
   position: absolute;
   right: 1%;
   margin: 5%;
 }
-#static_images #kompas{
+#static_images #compass{
   position: absolute;
   top: 1%;
   left: auto;
@@ -149,7 +149,23 @@ border-left: 0;
   height: 50%;
   margin: 5%;
 }
-#static_images #baan{
+#static_images #wind_info{
+  position: absolute;
+  bottom: 7.5%;
+  left: auto;
+  width: 240px;
+  height: 150px;
+  margin: 5%;
+  border-color: black;
+  border-style: solid;
+  border-width: 3px;
+}
+#static_images #wind_info p{
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 25px;
+}
+#static_images #course{
   position: absolute;
   top: 1%;
   left: 50%;
@@ -157,9 +173,34 @@ border-left: 0;
   height: 70%;
   margin: 5%;
 }
-#svg {
-  background-color: white;
+
+#scatter_results {
+  position: absolute;
+  top: 60%;
+  left: 50px;
+  background-color: #A1E7A1;
+  visibility: visible;
 }
-.svg {
-  background-color: white;
+
+#field_overview {
+  position: absolute;
+  top: 800px;
+  left: 50px;
+  bottom: 200px;
+  margin-top: 10%;
+  margin-bottom: 10%;
+  background-color: #A1E7A1;
+  visibility: visible;
 }
+#tooltip {   
+  position: absolute;           
+  text-align: center;           
+  width: 200px;                  
+  height: 200px;                 
+  padding: 2px;             
+  font: 25px sans-serif;        
+  background: lightsteelblue;   
+  border: 0px;      
+  border-radius: 25px;
+  opacity: 0.7;
+}          
