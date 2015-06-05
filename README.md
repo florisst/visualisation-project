@@ -6,38 +6,39 @@ Floris Stevens.
 ##Idee##
 
 ####Hoe eerlijk is de Willem-Alexander baan?####
-In de roeiwereld wordt veel gepraat over zogeheten "voordeellanen", waar je voordeel zou kunnen ondervinden van de wind en/of stroming, waar je in een andere laan op de roeibaan dit voordeel niet hebt en zelfs een nadeel zou kunnen hebben.  Recent is er een nieuwe roeibaan in Nederland aangelegt, de Willem-Alexander baan. Deze baan is niet alleen qua faciliteiten een verbetering op de in Amsterdam gelegen Bosbaan, hij zou ook een stuk eerlijker zijn dan laatstgenoemde. Van de Bosbaan wordt gezegd dat het weer zeer veel invloed heeft op de stroming van het water in de  verschillende lanen, bij de nieuwe Willem-Alexanderbaan zou dit niet zo'n effect hebben.
+Bij roeien is een wedstrijd-baan opgedeeld in verschillende start banen, waar je met maximaal 6 ploegen naast elkaar start krijgt iedere ploeg zijn eigen baan toegewezen. In de roeiwereld wordt veel gepraat over zogeheten "voordeelbanen", waar je voordeel zou kunnen ondervinden van de wind en/of stroming, waar je in een andere baan dit voordeel niet hebt en zelfs een nadeel zou kunnen hebben.  Recent is er een nieuwe roeibaan in Nederland aangelegt, de Willem-Alexander baan. Deze baan is niet alleen qua faciliteiten een verbetering op de in Amsterdam gelegen Bosbaan, hij zou ook een stuk eerlijker zijn dan laatstgenoemde. Van de Bosbaan wordt gezegd dat het weer zeer veel invloed heeft op de stroming van het water in de  verschillende banen, bij de nieuwe Willem-Alexanderbaan zou dit effect niet zo groot zijn.
 
 De site van de Willem-Alexander baan zegt zelf:
 "De roeibaan als geheel ligt open onder de hemel, alleen omringd door kleine rietlanden. De wind heeft er weliswaar vrij spel, maar treft alle banen even hard. Het maakt de Willem Alexander Baan tot een eerlijke wedstrijdbaan."
 
 Ik ben benieuwd in hoeverre dit correct is. Is de Willem-Alexander baan echt zo eerlijk als dat ze zelf beweren of is de baan in feite, net als
-de Bosbaan, beinvloedbaar door de wind.
+de Bosbaan, zeer beinvloedbaar door de wind.
 
 ##Verschillende onderdelen##
 Schets van de hoofd visualisatie
 ![dag grafiek](doc/schets_dag.jpg)
 
 1. HTML pagina
-  * Met aparte CSS file
+  * Met apart CSS bestand voor de stijl
   * Baan kaart bovenaan (statisch)
 2. Windroos
   * Windrichting van de dag, afhankelijk van de gekozen dag bij punt 3.
-  * Wind snelheid, afhankelijk van gekozen dag bij punt 3. 
+  * Wind snelheid, afhankelijk van gekozen dag bij punt 3.
+  * Wind informatie onder de roos weergegeven, de gemiddelde snelheid en richting die dag plus maximale windstoot. 
 3. Keuze menu voor verschillende velden
   * Kies wedstrijd (Westelijke 2015/Damen 2015/ Damen 2014)
-  * Kies dag (Zaterdag/Zondag)
-  * Kies veld (een specifiek roei-veld of alle velden)
+  * Kies dag (Zaterdag/Zondag/beide)
+  * Kies soort wedstrijd (voorwedstrijden, finales of beide)
 4. Grafieken die weergeeft in welke laan de winnende ploeg lag, per heat.
 
-Omdat alleen bij de voorwedstrijden de laan indeling volledig random geloot wordt, zal ik beginnen met alleen de voorwedstrijden van alle velden. Ploegen die winnen in de voorwedstrijd mogen in de finale in de gunstigste baan starten en dus zou dit een vertekend beeld kunnen geven. Wel Zou ik dit graag ook nog opnemen in een grafiek. Misschien dat het keuze menu uitgebreidt moet worden met een optie voor het soort wedstrijd (Voorwedstrijden, finales of beiden) waarna de gevraagde specificatie getekend wordt.  
+Omdat alleen bij de voorwedstrijden de baan indeling volledig random geloot wordt, zal ik beginnen met het verwerken van alleen de voorwedstrijden van alle velden. Ploegen die winnen in de voorwedstrijd mogen in de finale in de gunstigste baan starten en dus zou dit een vertekend beeld kunnen geven. Wel Zou ik dit graag ook nog opnemen in een grafiek. Misschien dat het keuze menu uitgebreidt moet worden met een optie voor het soort wedstrijd (Voorwedstrijden, finales of beiden) waarna de gevraagde specificatie getekend wordt.  
 Als de muis over een punt in de scater plot gaat zal een tooltip verschijnen waarin de ploegnaam, behaalde plaats en gevaren tijd worden weergegeven. Als de muis over het gebied gaat waar een heat in weergegeven wordt zal een tooltip moeten opkomen wie weergeeft welke heat dit is, welke ploegen er starten en in welke laan deze liggen. Zodra er op geklikt wordt zal een nieuwe visualisatie getekend moeten worden waarin van dat veld een voortgangs grafiek wordt getekend, Zoals hier onder schematisch weergegeven.
 
 ![veld grafiek](doc/schets_veld.jpg)
 
 
 ##Platform en externe componenten##
-Een HTML pagina zal worden gemaakt waar d3 en Javascript zullen worden gebruikt om een visualisatie zichtbaar te maken. De hoofd visualisatie zal een scatterplot zijn waarbij elk bolletje een gefinishte ploeg voorstelt. De verschillende wedstrijd lanen zullen worden uitgezet zodat snel kan worden gezien in welke laan het meest is gewonnen over de hele dag gezien (zie de schets van de hoofd visualisatie).
+Een HTML pagina zal worden gemaakt waar d3 en Javascript zullen worden gebruikt om een visualisatie zichtbaar te maken. De hoofd visualisatie zal een scatterplot zijn waarbij elk bolletje een gefinishte ploeg voorstelt. De verschillende banen zullen worden uitgezet zodat snel kan worden gezien in welke baan het meest is gewonnen over de hele dag gezien (zie de schets van de hoofd visualisatie).
 
 ##Benodigde data##
 Om de vraag te kunnen beantwoorden hoe eerlijk de Willem-Alexander baan nou is moet er natuurlijk weersdata zijn en roeiuitslagen nodig
@@ -54,7 +55,7 @@ De roeiuitslagen zullen worden gescraped van time-team.nl.
   3.	Damen 2014.
 
 Uiteindelijke visualisatie zal met behulp van D3 gemaakt worden en dus zal de data waarschijnlijk omgezet worden in JSON formaat.
-De uitslagen bevatten veel informatie en in elkgeval de starttijd, de loting over de lanen, de tussentijden, de tussenstanden en de finish volgorde en tijd zullen worden opgeslagen.
+De uitslagen bevatten veel informatie en in elkgeval de starttijd, de loting over de banen, de tussentijden, de tussenstanden en de finish volgorde en tijd zullen worden opgeslagen.
 
 
 ##Mogelijke problemen##
