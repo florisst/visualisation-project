@@ -43,7 +43,7 @@ Optioneel toe te voegen is:
 
 
 ##voorvertoning pagina layout##
-![](doc/userinterface.PNG)
+![](doc/userinterface.png)
 
 Rechtsbovenaan is de statische kaart van de baan met de vaar-richting weergegeven door de zwarte pijl. Links daarvan zien we de windroos waar met behulp van een SVG'tje een pijl de windrichting weer zal geven van de dag die geselecteerd is. Onder de windroos is een div-element geplaatst waar extra informatie over de wind komt, namelijk de gemiddelde richting en snelheid van de dag en de maximale windstoot. De inhoud van dit div-element wordt dus vanuit het schript nog bijgewerkt.
 
