@@ -29,11 +29,9 @@ def scrape_heats(heat_urls):
     heats = []
     for index in range(0,2):
         dag = heat_urls[index]
-        for i, url in enumerate(dag):
-        #for i in range (0,10):
-        #    url = dag[i]    
+        for i, url in enumerate(dag):  
             heat_html = URL(url).download(cached=True)
-            # Extract relevant information for each movie
+            # Extract relevant information for each heat
             heat_dom = DOM(heat_html)
             chart = heat_dom.by_tag("div")[8]
             # Extract discriptional data from the heat
@@ -59,7 +57,7 @@ def scrape_heats(heat_urls):
                     # some pages have an extra td element with irrelevant data, so we increment k by one.
                     if (len(chart.by_tag("tr")[1]) > 9):
                         k += 1
-                    lane = row.by_tag("td")[k].content
+                    lane = row.by_tag("td")[k].content[1:2]
                     k += 1
                 
                     # Results are divided in 500m, 1000m, 1500m and finish. all points have a time and a position value.
@@ -68,28 +66,28 @@ def scrape_heats(heat_urls):
                     interval["500m"] = interval_500
                     interval_500["time"] = row.by_tag("td")[k].content
                     k += 1
-                    interval_500["position"] = row.by_tag("td")[k].content
+                    interval_500["position"] = row.by_tag("td")[k].content[1:2]
                     k += 1
                         
                     interval_1000 = {}
                     interval["1000m"] = interval_1000
                     interval_1000["time"] = row.by_tag("td")[k].content
                     k += 1
-                    interval_1000["position"] = row.by_tag("td")[k].content
+                    interval_1000["position"] = row.by_tag("td")[k].content[1:2]
                     k += 1
                         
                     interval_1500 = {}
                     interval["1500m"] = interval_1500
                     interval_1500["time"] = row.by_tag("td")[k].content
                     k += 1
-                    interval_1500["position"] = row.by_tag("td")[k].content
+                    interval_1500["position"] = row.by_tag("td")[k].content[1:2]
                     k += 1
                 
                     finish = {}
                     interval["finish"] = finish
                     finish["time"] = row.by_tag("td")[k].content
                     k += 1
-                    finish["position"] = row.by_tag("td")[k].content
+                    finish["position"] = row.by_tag("td")[k].content[1:2]
 
                     results = {}
                     results["results"] = interval    
@@ -97,6 +95,7 @@ def scrape_heats(heat_urls):
                     heat.append(time)
                     heat.append(field)
                     heat.append(crew)
+                    heat.append(lane)
                     heat.append(results)
                 heats.append(heat)
 
@@ -110,7 +109,7 @@ if __name__ == '__main__':
     # Parse the HTML file into a DOM representation
     dom = DOM(html)
 
-    # Extract the tv series (using the function you implemented)
+    # Extract the heats
     heat_urls = scrape_heat_urls(dom)
     heats = scrape_heats(heat_urls)
     out_file = open(OUTPUT_JSON,"w")
