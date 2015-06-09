@@ -37,7 +37,7 @@ def scrape_heats(heat_urls):
                 chart = heat_dom.by_tag("div")[8]
                 # Extract discriptional data from the heat
                 discription = chart.by_tag("h2")[0].content
-                day = str((discription[:3]))
+                day = str((discription[:2]))
                 time = str(discription[3:8])
                 field = str(discription[11:])
 
@@ -93,7 +93,7 @@ def scrape_heats(heat_urls):
                     team.append(lane)
                     team.append(results)
 
-                heats.append(team)
+                    heats.append(team)
     return heats
 
 if __name__ == '__main__':
