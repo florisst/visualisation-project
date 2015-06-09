@@ -25,9 +25,9 @@ Temperature graph de Bilt
 				<li><a href="#">Wedstrijd</a>
 
 					<ul>
-						<li><a href="#">Westelijke 2015</a></li>
-						<li><a href="#">Damen 2015</a></li>
-						<li><a href="#">Damen 2014</a></li>
+						<li><a href="#" onclick="openwestelijke2015()">Westelijke 2015</a></li>
+						<li><a href="#" onclick="opendamen2015()">Damen 2015</a></li>
+						<li><a href="#" onclick="opendamen2014()">Damen 2014</a></li>
 					</ul>
 
 				</li>
@@ -35,9 +35,8 @@ Temperature graph de Bilt
 				<li><a href="#">Dag</a>
 
 					<ul>
-						<li><a href="#">Zaterdag</a></li>
-						<li><a href="#">Zondag</a></li>
-						<li><a href="#">Beide</a></li>
+						<li><a id="zaterdag_select" href="#">Zaterdag</a></li>
+						<li><a id="zondag_select" href="#">Zondag</a></li>
 					</ul>
 
 				</li>
@@ -64,7 +63,8 @@ Temperature graph de Bilt
 		</span>
 		</div>
 
-		<svg id="scatter_results">
+		<div id="container_scatter">
+		</div>
 		</svg>
 		<div id="tooltip">
 			<p> Extra informatie </p>
