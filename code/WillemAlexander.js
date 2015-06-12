@@ -14,15 +14,22 @@ function initialise(){
     .attr("height", height)
     .attr("id", "scatter_results")
 }
+// clear the main SVG.
 function clearSVG(){
   var rem = d3.select("#scatter_results")
   rem.remove();
+}
+// Clear the wind arrow SVG.
+function clearWind(){
+  svg = d3.select("#wind")
+  svg.remove();
 }
 
 // Use the data for Westelijke 2015 and prepare SVG for new graph.
 function openwestelijke2015(){
   console.log("Westelijke grafiek")
   initialise();
+  clearWind();
   loadWestelijke2015();
 }
 
@@ -30,12 +37,14 @@ function openwestelijke2015(){
 function opendamen2015(){
   console.log("Damen 2015 grafiek")
   initialise();
+  clearWind();
   loadDamen2015();
 }
 // Use the data for Damen 2014 and prepare SVG for new graph.
 function opendamen2014(){
   console.log("Damen 2014 grafiek")
   initialise();
+  clearWind();
   loadDamen2014();  
 }  
 // Select subset of data depending on menu clicked.  
@@ -43,11 +52,15 @@ function selectDay(results, weather){
   console.log("welke dag?")
   sat = document.getElementById("zaterdag_select")
   sat.addEventListener("click", function(){
-    saturday(results, weather)
+    clearWind();
+    weather_day = []
+    saturday(results, weather, weather_day)
   },true);
   sund = document.getElementById("zondag_select")
   sund.addEventListener("click", function(){
-    sunday(results, weather)
+    clearWind();
+    weather_day = []
+    sunday(results, weather, weather_day)
   },true);
 }
 
@@ -93,7 +106,11 @@ function damen2014(error, data_array){
 }
 
 // Only select those heats that where rowed on Saturday 
-function saturday (results, weather){
+function saturday (results, weather, weather_day){
+  weather_day = []
+  for (var i = 0; i < (weather.length/2); i++){
+    weather_day.push(weather[i])
+  }
   day_results = []
   clearDayResults(day_results);
   day_results = []
@@ -103,14 +120,18 @@ function saturday (results, weather){
       if (d.temp == "za" || d.temp == "za ")
           day_results.push(d)
     });
-    //console.log(day_results.length)
     clearSVG();
     initialise();
+    drawWindDirection(weather, weather_day)
     drawScatter(day_results, weather)
   })
 }
 // Only select those heats that where rowed on Sunday 
-function sunday (results, weather){
+function sunday (results, weather, weather_day){
+  weather_day = []
+  for (var i = 0; i < (weather.length/2); i++){
+    weather_day.push(weather[13+i])
+  }
   day_results = []
   d3.json(results, function() {
     results.forEach(function(d) {
@@ -120,14 +141,60 @@ function sunday (results, weather){
     });
     clearSVG();
     initialise();
+    drawWindDirection(weather, weather_day)
     drawScatter(day_results, weather)
   })
 }
+
+// empty the day_results list to prefent double data.
 function clearDayResults(day_results){
   while(day_results.length > 0)
   day_results.pop();
   console.log(day_results.length)
   return day_results;
+}
+
+// Draw the wind direction and update the wind dif.
+function drawWindDirection(weather,weather_day){
+  clearWind();
+  svg = d3.select("#static_images").append("svg")
+    .attr("id", "wind")
+
+  var sum_direction = 0,
+  sum_strength = 0,
+  sum_maxStrength = 0;
+  for (var i = 0; i < weather_day.length; i++){
+    temp = weather_day[i]
+    direction = temp["Windrichting"].trim()
+    sum_direction += parseInt(direction,10)
+    strength = temp["Windsnelheid"].trim()
+    sum_strength += parseInt(strength,10)
+    maxStrength = temp["Windstoot"].trim()
+    sum_maxStrength += parseInt(maxStrength,10)
+  }
+  var avrDirection = ((sum_direction % 360)/weather_day.length),
+  avrStrength = (sum_strength/weather_day.length)
+  avrMaxStrength = (sum_maxStrength/weather_day.length)
+
+  // Get the width and height of the SVG to determine the middle.
+  width_wind = parseInt(svg.style("width"));
+  heigt_wind = parseInt(svg.style("height"));
+
+  // Rotate the arrow depending on the average wind direction.
+  g = svg.append("g")
+  g.attr("transform", "rotate(" + avrDirection + "," + width_wind/2 + "," + heigt_wind/2 + ")")
+  // Define arrow 
+  g.append("line")
+    .attr("x1", width_wind/2)
+    .attr("y1", heigt_wind/2)
+    .attr("x2", width_wind/2)
+    .attr("y2", 50)
+    .attr("stroke-width", 5)
+    .attr("stroke", "blue");
+  g.append("polygon")
+    .attr("points", "115,60, 125,40, 135,60")
+    .attr("stroke-width", 4)
+    .attr("stroke", "blue");
 }
 
 // Draw the actual graph.
@@ -158,9 +225,8 @@ function drawScatter(day_results, weather){
     d.time1500 = d.crew["results"]["1500m"]["time"]
     d.pos1500 = d.crew["results"]["1500m"]["position"]
     d.crewname = d[3]
-    
-    // Other variables to contain the data still need to be made.
     });
+
   var xDomain = d3.extent(day_results, function(d) { return d.startTijd; })
   var yDomain = d3.extent(day_results, function(d) { return d.baan; });
 
@@ -169,8 +235,8 @@ function drawScatter(day_results, weather){
 
   var xAxis = d3.svg.axis().scale(xScale).orient('bottom');
   var yAxis = d3.svg.axis().scale(yScale).orient('left')
-    .ticks(6)
-    .tickFormat(function (d, i) {
+      .ticks(6)
+      .tickFormat(function (d, i) {
         return ['1', '2', '3', '4', '5', '6', '7', '8'][d];
     });
 
@@ -188,11 +254,12 @@ function drawScatter(day_results, weather){
 
   scatter_results.append("g")
     .attr("class", "y axis")
+    .attr("transform", "translate(50," + "0" +")")
     .call(yAxis)
   .append("text")
     .attr("class", "label")
-    .attr("transform", "rotate(-90)")
-    .attr("y", 6)
+    .attr("x", 20)
+    .attr("y", 20)
     .attr("dy", ".71em")
     .style("text-anchor", "end")
     .text("Baan")
@@ -220,6 +287,7 @@ return xScale, yScale;
 });
 }
 
+// Listen for mouse events.
 var movement;
 var update;
 var bisectDate = d3.bisector(function(d) { return d.startTijd; }).left;
@@ -289,6 +357,8 @@ function hideCrewTooltip(event){
   var div = d3.select("#crew_tooltip")
     .style("opacity", "0")
 }
+
+// Change position and content of Crew tooltip.
 function updateCrewTooltip(day_results, d, event){
   var div = d3.select("#crew_tooltip")
   div.style("left", (d3.event.pageX + 300) + "px")
@@ -328,9 +398,7 @@ function updateCrewTooltip(day_results, d, event){
   temp = d[5]["results"]["finish"]["time"]
   info_2000.push(temp)
   info_2000.toString();
-  /*console.log(crew)
-  console.log(lane)
-  console.log(info_2000)*/
+
   var div = d3.select("#tijd_crew")
   div.html("Starttijd: " + tijd)  
   var div = d3.select("#ploeg_tooltip")
@@ -419,6 +487,7 @@ function updateHeatTooltip(i,x,day_results){
     + "Baan 7: " + baan7 + "<br>"
     + "Baan 8: " + baan8 + "<br>")
 
+// Helper functions to check wheater a crew belongs in a heat or not.
 function crewExists(crewname, arr) {
   return arr.some(function(el) {
     return el.crewname === crewname;
