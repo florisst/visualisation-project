@@ -13,15 +13,23 @@ Temperature graph de Bilt
     	<meta charset="utf-8">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
     	<title> Willem-Alexander baan </title>
+    	<script src="d3.js"></script>
+		<script src="queue.js"></script>
+		<!-- <script src="WillemAlexander.js"></script> -->
+		<script src="drawscatter.js"></script>	
 	</head>
 	<body>
-		<div class="header">
+		<header>
 			
 			<h1 id="title"> Het eerlijke verloop van wedstrijden op de Willem-Alexander Baan </h1>
-			<div id="keuze">
-				<p id="wedstrijd"> Nog geen wedstrijd gekozen </p>
-				<p id="dag"> nog geen dag gekozen </p>
-				<p id="soort wedstrijd"> nog geen soort wedstrijd gekozen</p>
+			<div id="selection">
+				<span>
+				<p id="wedstrijd"> gekozen wedstrijd  </p>
+				<p> - </p>
+				<p id="dag"> gekozen dag </p>
+				<p> - </p>
+				<p id="soort_wedstrijd"> soort wedstrijd gekozen</p>
+				</span>
 			</div>
 
 			<div id="menu">
@@ -30,9 +38,9 @@ Temperature graph de Bilt
 					<li><a href="#">Wedstrijd</a>
 
 						<ul>
-							<li><a href="#" onclick="openwestelijke2015()">Westelijke 2015</a></li>
-							<li><a href="#" onclick="opendamen2015()">Damen 2015</a></li>
-							<li><a href="#" onclick="opendamen2014()">Damen 2014</a></li>
+							<li><a id="selectWes" href="#">Westelijke 2015</a></li>
+							<li><a id="selecDam15" href="#">Damen 2015</a></li>
+							<li><a id="selecDam14" href="#">Damen 2014</a></li>
 						</ul>
 
 					</li>
@@ -49,9 +57,9 @@ Temperature graph de Bilt
 					<li><a href="#">Soort wedstrijd</a>
 
 						<ul>
-							<li><a href="#">Voorwedstrijd</a></li>
-							<li><a href="#">Finales</a></li>
-							<li><a href="#">Beide</a></li>
+							<li><a id="select_voorwedstrijd" href="#">Voorwedstrijd</a></li>
+							<li><a id="select_finales" href="#">Finales</a></li>
+							<li><a id="select-beide"href="#">Beide</a></li>
 						</ul>
 
 					</li>
@@ -59,39 +67,50 @@ Temperature graph de Bilt
 				</ul>
 			</div>
 
-			<div id="static_images">
-			<span><img id="course" src="images/baan_ligging.PNG" alt="Baan ligging">
-			<img id="compass" src="images/compass.jpg" alt="kompas">
-
+		</header>
+		<aside>
 			<div id="wind_info">
 				<p> Wind informatie </p>
+				<p id="infoUpdate"> </p>
 			</div>
-			</span>
+			<div id="static_images">
+			<span><img id="course" src="images/baan_ligging.PNG" alt="Baan ligging">
+			<img id="compass" src="images/compass.png" alt="kompas">
+			<div id="wind"> </div>
 			</div>
-		</div>
+			
+			<div class="container">
+				<div id="tooltip">
+					<p> Extra informatie </p>
+					<p id="veld_tooltip"> </p>
+					<p id="banen_tooltip"> </p>
+					<p id="tijd_tooltip"> </p>
+				</div>
+				
+				<div id="crew_tooltip">
+					<p> Extra informatie ploeg </p>
+					<p id="tijd_crew"> </p>
+					<p id="ploeg_tooltip"> </p>
+					
+					<div id="positie">
+						<p> positie </p>
+						<p id="tussenstand_tooltip"> </p>
+					</div>
+					
+					<div id="ToolTipTijd">
+						<p> tussentijden </p>
+						<p id="crewTooltipTijd"> </p>
+					</div>
+				
+				</div>	
+			</div>
 
-		<div class="section">
+		</aside>
+
+		<section>
 			<div id="container_scatter">
 			</div>
 
-			<div id="tooltip">
-				<p> Extra informatie </p>
-				<p id="veld_tooltip"> </p>
-				<p id="banen_tooltip"> </p>
-				<p id="tijd_tooltip"> </p>
-			</div>
-			<div id="crew_tooltip">
-				<p> Extra informatie ploeg </p>
-				<p id="tijd_crew"> </p>
-				<p id="ploeg_tooltip"> </p>
-				<p id="tussenstand_tooltip"> </p>
-			</div>
-			<svg id="field_overview">
-			</svg>
-		</div>
-
-	<script src="d3.js"></script>
-	<script src="queue.js"></script>
-	<script src="WillemAlexander.js"></script>	
+		</section>
 	</body>
 </html>

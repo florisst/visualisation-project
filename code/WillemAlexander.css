@@ -49,60 +49,61 @@ table {
 
 body {
   background-position: center;
-  background-size: cover;
+  /*background-size: cover;*/
   background-color: #47D147;
   width: auto;
   height: auto;
 
 }
 
-.header{
+header{
   position: fixed;
-  width: 100%;
-  height: 300px;
+  width: 65%;
+  height: 30%;
   margin: 0 auto;
   border:1px solid #CCC;
 }
 
-.header #title{
+header #title{
   text-align: center;
-  position: fixed;
+  position: relative;
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 35px;
-  margin: 1% 10%;
+  margin: 0 auto;
 
 }
 
-.header #menu{
-  position: fixed;
-  top: 5%;
-  margin: 5%;
+header #menu{
+  width: 100%;
+  position: relative;
+  top: 0;
+  margin: 2% 15%;
 }
 
-.header #nav, #nav ul {
+header #nav, #nav ul {
 padding: 3px 0 0 0;
 margin: 0;
 list-style: none;
 }
 
-.header #nav li {
+header #nav li {
 float: left;
 width: 200px;
 }
 
-.header #nav ul {
+header #nav ul {
 position: fixed;
 width: 200px;
 left: -1000px;
 }
 
-.header #nav li:hover ul, #nav li.ie_does_hover ul {
+header #nav li:hover ul, #nav li.ie_does_hover ul {
 left: auto;
 background-position: 0 0;
 }
 
-.header #nav a {
+header #nav a {
 display: block;
 margin: 1%;
 text-decoration: none;
@@ -110,78 +111,119 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 1em;
 }
 
-.header ul a{
+header ul a{
 font-weight: bold;
 color: #0099FF;
 cursor: default;
 text-align: center;
 }
 
-.header ul ul a:link, ul ul a:visited{
+header ul ul a:link, ul ul a:visited{
 font-weight: normal;
 color: #0099FF;
 cursor: pointer;
 }
 
-.header ul ul a:hover, ul ul a:active{
+header ul ul a:hover, ul ul a:active{
 font-weight: normal;
 color: #FFF;
 cursor: pointer;
 }
 
-.header ul li{
+header ul li{
 background-color: #A1E7A1;
 border-left: 3px solid #47D147;
 }
 
-.header ul ul li{
+header ul ul li{
 background-color: #A1E7A1;
 border-top: 3px solid #47D147;
 border-left: 0;
 }
 
-.header #static_images{
-  width: 250px;
-  height: 250px;
+header #selection{
   position: absolute;
-  right: 5%;
-  margin: 5%;
+  bottom: 5%;
+  margin: 5% 5% 5%;
+  width: 100%;
+  max-width: 100%;
+  min-width: 10%;
+  max-height: 10%;
+  min-height: 1%;
 }
-.header #static_images #compass{
-  position: absolute;
-  top: 1%;
-  left: auto;
-  width: 50%;
-  height: 50%;
-  margin: 5%;
-  visibility: visible;
+
+header #selection span{
+  padding: 3px 0 0 0;
+  margin: 0 auto;
 }
-.header #static_images #wind_info{
+
+header #selection p{
+  text-align: center;
+  display: inline-block;
+  margin: 1%;
+  text-decoration: none;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  max-width: 100%;
+  min-width: 10%;
+  max-height: 10%;
+  min-height: 1%;
+}
+
+aside{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 34%;
+  height: 100%;
+  border:2px solid #CCC;
+}
+aside #wind_info{
   position: absolute;
-  bottom: 7.5%;
+  top: 14%;
   left: auto;
-  width: 50%;
-  height: 50%;
-  margin: 5%;
+  margin: 30% auto;
+  width: 99%;
+  height: 17.5%;
   border-color: black;
   border-style: solid;
   border-width: 3px;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
 }
-.header #static_images #wind{
+
+aside #wind_info #infoUpdate{
+  font-size: 18px;
+}
+aside #static_images{
+  width: 300px;
+  height: 300px;
   position: absolute;
-  top: 1%;
-  left: 0;
+  left: 5%;
+  top: 0;
+  margin: 0 auto;
+}
+aside #static_images #compass{
+  position: absolute;
+  top: 0.5%;
+  left: auto;
   width: 50%;
   height: 50%;
   margin: 5%;
   opacity: 1;
 }
-.header #static_images #wind_info p{
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 25px;
+
+aside #static_images #wind{
+  width: 50%;
+  height: 50%;
+  margin: 5%;
+  background-color: white;
+  opacity: 1;
 }
-.header #static_images #course{
+
+aside #static_images #course{
   position: absolute;
   top: 1%;
   left: 50%;
@@ -189,84 +231,99 @@ border-left: 0;
   height: 70%;
   margin: 5%;
 }
-
-.section{
+aside .container{
   position: absolute;
-  /*top: 100%;*/
-  top: 60%;
-  bottom: 5%;
+  top: 54%;
   width: 100%;
   height: 100%;
-  margin: 5%;
 }
 
-.section #container_scatter {
-  position: absolute;
-  /*width: 3000px;
-  height: 3000px;*/ 
-  background-color: #A1E7A1;
-  visibility: visible;
-}
-.section #scatter_results {
-
-}
-
-.section #field_overview {
-  position: absolute;
-  top: 1000px;
-  left: 50px;
-  bottom: 200px;
-  margin-top: 10%;
-  margin-bottom: 10%;
-  background-color: #A1E7A1;
-  visibility: visible;
-}
-#tooltip {   
+aside .container #tooltip {   
   position: absolute; 
-  top: 60%;
-  right: 5%;  
+  /*top: 40%;*/
+  right: 1%;  
   margin: 5%;        
   text-align: center;           
-  width: 300px; 
-  height: 420px;                 
-  max-height: 500px;              
-  padding: 2px;             
-  font: 25px sans-serif;        
-  background: lightsteelblue;   
-  border: 0px;      
+  width: 45%; 
+  height: 44%;  
+  margin: 0 1%;               
+  /*max-height: 500px;              
+  padding: 2px;   */          
+  font: 18px sans-serif;        
+  background: #ccff00;   
+  border: 2px;
+  border-color: black;
+  border-style: solid;  
   border-radius: 25px;
   opacity: 0;
   pointer-events: none;
 }
-#tooltip #banen_tooltip{
+aside .container #tooltip #banen_tooltip{
   text-align: left;
 }
-#tooltip #tijd_tooltip{
+aside .container #tooltip #tijd_tooltip{
   position: absolute;
   text-align: center;
 }
 
-#crew_tooltip {   
+aside .container #crew_tooltip {   
   position: absolute; 
-  top: 60%;
-  right: 5%;  
+  /*top: 40%;*/
+  left: 1%;  
   margin: 5%;          
   text-align: center;           
-  width: 300px; 
-  height: 220px;                 
-  max-height: 500px;              
-  padding: 2px;             
-  font: 25px sans-serif;        
-  background: red;   
-  border: 0px;      
+  width: 45%; 
+  height: 44%;       
+  margin: 0 1%;          
+  /*max-height: 500px;              
+  padding: 2px; */            
+  font: 18px sans-serif;        
+  background: #ccff00;   
+  border: 2px;
+  border-color: black;
+  border-style: solid;      
   border-radius: 25px;
   opacity: 0;
 }
-#crew_tooltip #tussenstand_tooltip{
+
+aside .container #crew_tooltip #positie{
   position: absolute;
-  text-align: center;
+  left: 5%;
+  text-align: justify;
 }
 
+
+aside .container #crew_tooltip #ToolTipTijd{
+  position: absolute;
+  right: 5%;
+  text-align: left;
+}
+
+section{
+  position: absolute;
+  top: 50%;
+  /*bottom: 5%;*/
+  width: 65%;
+  height: 345%;
+  margin: 5% 0;
+  border:1px solid #CCC;
+}
+
+section #container_scatter {
+  position: absolute;
+  float: middle;
+  /*width: 3000px;
+  height: 3000px;*/
+  background-color: #A1E7A1;
+  visibility: visible;
+  margin: 0 auto;
+  padding: auto;
+}
+section #container_scatter #scatter_results {
+  padding: auto;
+  vertical-align: center;
+  margin: auto;
+}
 
 .axis path,
 .axis line {
