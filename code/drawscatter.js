@@ -1,13 +1,7 @@
 window.onload = function(){
   loadData()
-  //main()
-
 }
-//results = 0;
-/*function main(){
-  //results = 0;
-  //selectDay(results, weather)
-}*/
+
 
 function loadData(){
   var q = queue(1)
@@ -24,6 +18,11 @@ function loadData(){
 function page(error, data_array){
   var wes = document.getElementById("selectWes")
   wes.addEventListener("click", function(){
+    loadData()
+    graph = d3.select("#container_scatter")
+      .style("opacity", "0")
+    info = d3.select(".infobox")
+      .style("opacity", "1")
     var p = d3.select("#wedstrijd")
     p.html("Westelijke 2015")
     var p = d3.select("#dag")
@@ -39,6 +38,11 @@ function page(error, data_array){
   },true)
   var dam15 = document.getElementById("selecDam15")
   dam15.addEventListener("click", function(){
+    loadData()
+    graph = d3.select("#container_scatter")
+      .style("opacity", "0")
+    info = d3.select(".infobox")
+      .style("opacity", "1")
     var p = d3.select("#wedstrijd")
     p.html("Damen 2015")
     console.log("damen2015")
@@ -53,6 +57,11 @@ function page(error, data_array){
   },false)
   var dam14 = document.getElementById("selecDam14")
   dam14.addEventListener("click", function(){
+    loadData()
+    graph = d3.select("#container_scatter")
+      .style("opacity", "0")
+    info = d3.select(".infobox")
+      .style("opacity", "1")
     var p = d3.select("#wedstrijd")
     p.html("Damen 2014")
     var p = d3.select("#dag")
@@ -290,7 +299,7 @@ function drawWindDirection(weather,weather_day){
     .attr("stroke", "blue")
     .style("opacity", "1")
   div = d3.select("#infoUpdate")
-  div.html("<br>" + "Gemiddelde snelheid: <br>" + avrStrength + " m/s <br> Hardste windstoot: <br>" + strengthMax + " m/s <br>")
+  div.html("Gemiddelde snelheid: <br>" + avrStrength + " m/s <br> Hardste windstoot: <br>" + strengthMax + " m/s <br>")
   
   // A second arrow is used to show hourly wind directions and is defined here. Rotation is done in redirectArrow.
   optionalArrow = svg.append("g")
@@ -321,28 +330,25 @@ function drawScatter(DataSelection, day_results, weather_day, weather){
   height = 3000  - margin.top - margin.bottom;
   var padding = 50;
   var left_pad = 100;
+  graph = d3.select("#container_scatter")
+    .style("opacity", "1")
+  info = d3.select(".infobox")
+    .style("opacity", "0")
 
   var svg = d3.select("#scatter_results").append("g")
   //  .attr("transform", "rotate(90," + width/2 + "," + height/2 + ")")
   // reach the data with d3.
   var parseTime = d3.time.format("%H:%M").parse
-    d3.json(DataSelection, function() {
+  d3.json(DataSelection, function() {
     DataSelection.forEach(function(d) {
     d.baan = +d[4]
     d.startTijd = parseTime(d[1])
+    
     d.crew = d[5]
     d.finishtime = d.crew["results"]["finish"]["time"]
     d.finishPos = +d.crew["results"]["finish"]["position"]
     d.radius = 20-3*d.finishPos
-    d.heat = d[2]
-    d.time500 = d.crew["results"]["500m"]["time"]
-    d.pos500 = +d.crew["results"]["500m"]["position"]
-    d.time1000 = d.crew["results"]["1000m"]["time"]
-    d.pos1000 = +d.crew["results"]["1000m"]["position"]
-    d.time1500 = d.crew["results"]["1500m"]["time"]
-    d.pos1500 = +d.crew["results"]["1500m"]["position"]
-    d.crewname = d[3]
-    });
+    })
 
   var xDomain = d3.extent(DataSelection, function(d) { return d.baan; })
   var yDomain = d3.extent(DataSelection, function(d) { return d.startTijd; })
@@ -458,11 +464,19 @@ function redirectArrow(timeslot,weather_day){
     if (+temp === (+timeslot + 1)){
       direction = +weather_day[i]["Windrichting"].trim()
       arrow = d3.select(".optionalArrow")
-      .style("opacity", "1")
-      .transition()
-      .duration(500)
-      .attr("transform", "rotate(" + direction + "," + width_wind/2 + "," + height_wind/2 + ")");
-      console.log(direction)
+        .style("opacity", "1")
+        .transition()
+        .duration(500)
+        .attr("transform", "rotate(" + direction + "," + width_wind/2 + "," + height_wind/2 + ")");
+
+      // Get the strength and max strength for that hour of the day
+      var strength = (+weather_day[i]["Windsnelheid"].trim())*0.1
+      var maxStrength = (+weather_day[i]["Windstoot"].trim())*0.1
+
+      div = d3.select("#updateHour")
+        .style("opacity", "1");
+      div.html("Gemiddelde snelheid: <br>" + strength + " m/s <br> Hardste windstoot: <br>" + maxStrength + " m/s <br>") 
+
     }
   }
 }
@@ -471,8 +485,10 @@ function redirectArrow(timeslot,weather_day){
 function mouseOut(event){
   var div = d3.select("#tooltip")
     .style("opacity", "0")
-  arrow = d3.select(".optionalArrow")
+  var arrow = d3.select(".optionalArrow")
     .style("opacity", "0")
+  var div = d3.select("#updateHour")
+    .style("opacity", "0");
 }
 
 // Make the tooltip for crew information visible
@@ -580,10 +596,9 @@ function updateHeatTooltip(i,day_results){
     for (var j = 0; j < 8; j++){
       temp = baan[j]
       if (typeof temp == "undefined"){
-        baan[j] = "-----"
+        baan[j] = " ----- "
       }
     }
-    console.log(baan)
   
   // Add info the the actual tooltip 
   var div = d3.select("#veld_tooltip")
