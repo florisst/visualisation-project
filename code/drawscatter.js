@@ -18,72 +18,94 @@ function loadData(){
 function page(error, data_array){
   var wes = document.getElementById("selectWes")
   wes.addEventListener("click", function(){
-    loadData()
+    // Hide the scatter plot SVG
     graph = d3.select("#container_scatter")
       .style("opacity", "0")
+    // Show the explanation of page.
     info = d3.select(".infobox")
       .style("opacity", "1")
+    // Show which competition is selected.
     var p = d3.select("#wedstrijd")
     p.html("Westelijke 2015")
+    
+    // Show that no subselection is made.
     var p = d3.select("#dag")
     p.html("gekozen dag")
     var p = d3.select("#soort_wedstrijd")
     p.html("soort wedstrijd gekozen")
-    console.log("westelijke2015")
+    
+    // Hide the wind information and wind arrow
+    var wind = d3.select("#infoUpdate")
+    wind.style("opacity", "0")
+    var arrow = d3.select("#windArrow")
+    arrow.style("opacity", "0")
+    
+    // Select the right data.
     wesRes = data_array[0]
     wesWea = data_array[1]
-    console.log("lengte resultaten")
-    console.log(wesRes.length)
     selectDay(wesRes,wesWea)
   },true)
   var dam15 = document.getElementById("selecDam15")
   dam15.addEventListener("click", function(){
-    loadData()
+    // Hide the scatter plot SVG
     graph = d3.select("#container_scatter")
       .style("opacity", "0")
+    // Show the explanation of page.
     info = d3.select(".infobox")
       .style("opacity", "1")
+    // Show which competition is selected.
     var p = d3.select("#wedstrijd")
     p.html("Damen 2015")
-    console.log("damen2015")
+    // Show that no subselection is made.
     var p = d3.select("#dag")
     p.html("gekozen dag")
     var p = d3.select("#soort_wedstrijd")
     p.html("soort wedstrijd gekozen")
+    
+    // Hide the wind information and wind arrow
+    var wind = d3.select("#infoUpdate")
+    wind.style("opacity", "0")
+    var arrow = d3.select("#windArrow")
+    arrow.style("opacity", "0")
     d15Res = data_array[2]
     d15Wea = data_array[3]
-    console.log(d15Res.length)
     selectDay(d15Res,d15Wea)
   },false)
   var dam14 = document.getElementById("selecDam14")
   dam14.addEventListener("click", function(){
-    loadData()
+    // Hide the scatter plot SVG
     graph = d3.select("#container_scatter")
       .style("opacity", "0")
+    // Show the explanation of page.
     info = d3.select(".infobox")
       .style("opacity", "1")
+    // Show which competition is selected.
     var p = d3.select("#wedstrijd")
     p.html("Damen 2014")
+    
+    // Show that no subselection is made.
     var p = d3.select("#dag")
     p.html("gekozen dag")
     var p = d3.select("#soort_wedstrijd")
     p.html("soort wedstrijd gekozen")
-    console.log("damen2014")
+    
+    // Hide the wind information and wind arrow
+    var wind = d3.select("#infoUpdate")
+    wind.style("opacity", "0")
+    var arrow = d3.select("#windArrow")
+    arrow.style("opacity", "0")
     d14Res = data_array[4]
     d14Wea = data_array[5]
-    console.log(d14Res.length)
     selectDay(d14Res,d14Wea)
   },false)
 }
 
 // Select subset of data depending on menu clicked.  
 function selectDay(results, weather){
-  console.log("welke dag?")
   sat = document.getElementById("zaterdag_select")
   sat.addEventListener("click", function(){
     var p = d3.select("#dag")
     p.html("Zaterdag")  
-    //clearWind()
     weather_day = []
     saturday(results, weather, weather_day)
   },false)
@@ -100,7 +122,6 @@ function selectDay(results, weather){
 
 // Only select those heats that where rowed on Saturday 
 function saturday (results, weather, weather_day){
-  console.log("zaterdag")
   if (typeof(day_results) !== 'undefined') {
     clearArray(day_results)
   }
@@ -110,26 +131,20 @@ function saturday (results, weather, weather_day){
   }
   day_results = []
   results.forEach(function(d) {
-    i++;
     d.temp = d[0]
     if (d.temp == "za" || d.temp == "za "){
         day_results.push(d)
       }
     })
-  //clearArray(results)
 
   clearSVG()
   initialise()
-    //clearArray(results)
   drawWindDirection(weather, weather_day)
   selectType(results, day_results, weather_day, weather)
-    
-    //drawScatter(day_results, weather)
 }
 
 // Only select those heats that where rowed on Sunday 
 function sunday (results, weather, weather_day){
-  console.log("Zondag")
   if (typeof(day_results) !== 'undefined') {
     clearArray(day_results)
   }
@@ -144,13 +159,11 @@ function sunday (results, weather, weather_day){
       day_results.push(d)
     }
   })
-  //clearArray(results)
+
   clearSVG()
   initialise()
-    //clearArray(results)
   drawWindDirection(weather, weather_day)
   selectType(results, day_results, weather_day, weather)
-    //drawScatter(day_results, weather)
 }
 
 function initialise(){
@@ -185,8 +198,7 @@ function clearWind(){
 function selectType(results, day_results, weather_day, weather){
   clearSVG()
   initialise()
-  console.log("type?")
-  clearArray(results)
+  //clearArray(results)
   DataSelection = []
   clearArray(DataSelection)
   DataSelection = []
@@ -197,16 +209,16 @@ function selectType(results, day_results, weather_day, weather){
     initialise()
     DataSelection = []
     clearArray(DataSelection)
-    d3.json(day_results, function() {
+    /*d3.json(day_results, function() {*/
     day_results.forEach(function(d) {
       temp = d[2].slice(-6)
       if (temp !== "finale"){
         DataSelection.push(d)
       }
       })
-    drawScatter(DataSelection, day_results, weather_day, weather)
+    drawScatter(DataSelection, results, day_results, weather_day, weather)
   },true)
-  })
+  
   finale = document.getElementById("select_finales")
   finale.addEventListener("click", function(){
     var p = d3.select("#soort_wedstrijd")
@@ -214,16 +226,16 @@ function selectType(results, day_results, weather_day, weather){
     initialise()
     DataSelection = []
     clearArray(DataSelection)
-    d3.json(day_results, function() {
+    /*d3.json(day_results, function() {*/
     day_results.forEach(function(d) {
       temp = d[2].slice(-6)
       if (temp === "finale"){
         DataSelection.push(d)
       }
       })
-    drawScatter(DataSelection, day_results, weather_day, weather)
+    drawScatter(DataSelection, results, day_results, weather_day, weather)
   },true)
-  })
+  
   both = document.getElementById("select-beide")
   both.addEventListener("click", function(){
     var p = d3.select("#soort_wedstrijd")
@@ -231,14 +243,13 @@ function selectType(results, day_results, weather_day, weather){
     initialise()
     DataSelection = []
     clearArray(DataSelection)
-    d3.json(day_results, function() {
+    /*d3.json(day_results, function() {*/
     day_results.forEach(function(d) {
       DataSelection.push(d)
     })
-    console.log(DataSelection.length)
-    drawScatter(DataSelection, day_results, weather_day, weather)
+    drawScatter(DataSelection, results, day_results, weather_day, weather)
   },true)
-  })
+  
 }
 
 
@@ -283,6 +294,7 @@ function drawWindDirection(weather,weather_day){
 
   // Define and rotate the main arrow depending on the average wind direction.
   g = svg.append("g")
+    .attr("id", "windArrow")
   g.attr("transform", "rotate(" + avrDirection + "," + width_wind/2 + "," + height_wind/2 + ")")
   // Define arrow 
   g.append("line")
@@ -298,7 +310,9 @@ function drawWindDirection(weather,weather_day){
     .attr("fill", "blue")
     .attr("stroke", "blue")
     .style("opacity", "1")
+  
   div = d3.select("#infoUpdate")
+  div.style("opacity", "1")
   div.html("Gemiddelde snelheid: <br>" + avrStrength + " m/s <br> Hardste windstoot: <br>" + strengthMax + " m/s <br>")
   
   // A second arrow is used to show hourly wind directions and is defined here. Rotation is done in redirectArrow.
@@ -323,7 +337,9 @@ function drawWindDirection(weather,weather_day){
 
 
 // Draw the actual graph.
-function drawScatter(DataSelection, day_results, weather_day, weather){
+function drawScatter(DataSelection, results, day_results, weather_day, weather){
+  console.log(results.length)
+
   // Set properties of SVG like width, height.
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
   width = 800 - margin.left - margin.right,
@@ -336,7 +352,7 @@ function drawScatter(DataSelection, day_results, weather_day, weather){
     .style("opacity", "0")
 
   var svg = d3.select("#scatter_results").append("g")
-  //  .attr("transform", "rotate(90," + width/2 + "," + height/2 + ")")
+
   // reach the data with d3.
   var parseTime = d3.time.format("%H:%M").parse
   d3.json(DataSelection, function() {
@@ -404,13 +420,13 @@ function drawScatter(DataSelection, day_results, weather_day, weather){
     .on("mouseout", function(d){
       hideCrewTooltip()
     })
-  eventlistener(weather_day)
+  eventlistener(results, weather_day)
 })
 }
 
 // Listen for mouse events.
 var bisectDate = d3.bisector(function(d) { return d.startTijd; }).left;
-function eventlistener(weather_day){
+function eventlistener(results, weather_day){
   tooltip = d3.select("#tooltip")
     .style("opacity", "0")
   point = d3.selectAll(".dot")
@@ -455,6 +471,7 @@ function eventlistener(weather_day){
   svg.on("mouseleave", function(){
     mouseOut(event)
   })
+  loadData();
 }
 
 // Rotates arrow in the compass to show hourly wind directions.
@@ -504,7 +521,6 @@ function hideCrewTooltip(event){
 
 // Change content of Crew tooltip.
 function updateCrewTooltip(day_results, crew, event){
-  console.log("updateCrewTooltip")
   // Use the (in eventlistener) selected data point.
   info = crew.node().__data__;
   var div = d3.select("#crew_tooltip")
@@ -617,8 +633,6 @@ function updateHeatTooltip(i,day_results){
     + "Baan 7: " + baan[6] + "<br>"
     + "Baan 8: " + baan[7] + "<br>")
 }
-
-
 
 /*
  *  Helper functions 

@@ -54,10 +54,9 @@ body {
   min-width: 960px;
   max-width: 1280px;
   height: auto;
-
 }
 
-body header{
+/*body header{
   position: fixed;
   width: 65%;
   height: 20%;
@@ -65,6 +64,15 @@ body header{
   border:1px solid #CCC;
   background-color: #47D147;
   z-index: 1;
+}*/
+body header{
+  position: absolute;
+  width: 65.1%;
+  height: 20%;
+  margin: 0 auto;
+  border:1px solid #CCC;
+  background-color: #47D147;
+  /*z-index: 1;*/
 }
 
 header #title{
@@ -178,7 +186,7 @@ aside{
   position: fixed;
   top: 0;
   right: 0;
-  width: 34%;
+  width: 34.5%;
   height: 100%;
   border:2px solid #CCC;
 }
@@ -333,12 +341,12 @@ aside .container #crew_tooltip #ToolTipTijd{
 
 body section{
   position: absolute;
-  top: 10%;
+  top: 15%;
   width: 65%;
   height: 345%;
   margin: 5% 0;
   background-color: #47D147;
-  border:1px solid #CCC;
+  /*border:1px solid #CCC;*/
 }
 body section .infobox{
   position: absolute;
@@ -348,7 +356,6 @@ body section .infobox{
   border:2px solid black;
   font: 15px sans-serif; 
   opacity: 1;
-
 }
 
 body section #container_scatter {
@@ -368,7 +375,22 @@ body section #container_scatter #scatter_results {
   vertical-align: center;
   margin: auto;
 }
+body section #conclusie{
+  position: relative;
+  top: 3000px;
+  margin: 4% 5%;
+  padding: 3%;
+  border:2px solid black;
+  text-align: center;
+  font: 15px sans-serif; 
+  opacity: 1;
+}
 
+body section #conclusie .title{
+  text-align: center;
+  font: 20px sans-serif; 
+ 
+}
 .axis path,
 .axis line {
   fill: none;
