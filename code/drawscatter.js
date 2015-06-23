@@ -1,3 +1,4 @@
+"use strict";
 window.onload = function(){
   loadData()
 }
@@ -18,11 +19,12 @@ function loadData(){
 function page(error, data_array){
   var wes = document.getElementById("selectWes")
   wes.addEventListener("click", function(){
+    clearSVG()
     // Hide the scatter plot SVG
-    graph = d3.select("#container_scatter")
+    var graph = d3.select("#container_scatter")
       .style("opacity", "0")
     // Show the explanation of page.
-    info = d3.select(".infobox")
+    var info = d3.select(".infobox")
       .style("opacity", "1")
     // Show which competition is selected.
     var p = d3.select("#wedstrijd")
@@ -41,21 +43,25 @@ function page(error, data_array){
     arrow.style("opacity", "0")
     
     // Select the right data.
-    wesRes = data_array[0]
-    wesWea = data_array[1]
+    var wesRes = data_array[0]
+    var wesWea = data_array[1]
     selectDay(wesRes,wesWea)
   },true)
   var dam15 = document.getElementById("selecDam15")
   dam15.addEventListener("click", function(){
+    clearSVG()
     // Hide the scatter plot SVG
-    graph = d3.select("#container_scatter")
+    var graph = d3.select("#container_scatter")
       .style("opacity", "0")
+    
     // Show the explanation of page.
-    info = d3.select(".infobox")
+    var info = d3.select(".infobox")
       .style("opacity", "1")
+    
     // Show which competition is selected.
     var p = d3.select("#wedstrijd")
     p.html("Damen 2015")
+    
     // Show that no subselection is made.
     var p = d3.select("#dag")
     p.html("gekozen dag")
@@ -67,18 +73,23 @@ function page(error, data_array){
     wind.style("opacity", "0")
     var arrow = d3.select("#windArrow")
     arrow.style("opacity", "0")
-    d15Res = data_array[2]
-    d15Wea = data_array[3]
+
+    // Select the right data.
+    var d15Res = data_array[2]
+    var d15Wea = data_array[3]
     selectDay(d15Res,d15Wea)
   },false)
   var dam14 = document.getElementById("selecDam14")
   dam14.addEventListener("click", function(){
+    clearSVG()
     // Hide the scatter plot SVG
-    graph = d3.select("#container_scatter")
+    var graph = d3.select("#container_scatter")
       .style("opacity", "0")
+    
     // Show the explanation of page.
-    info = d3.select(".infobox")
+    var info = d3.select(".infobox")
       .style("opacity", "1")
+    
     // Show which competition is selected.
     var p = d3.select("#wedstrijd")
     p.html("Damen 2014")
@@ -94,27 +105,29 @@ function page(error, data_array){
     wind.style("opacity", "0")
     var arrow = d3.select("#windArrow")
     arrow.style("opacity", "0")
-    d14Res = data_array[4]
-    d14Wea = data_array[5]
+
+    // Select the right data.
+    var d14Res = data_array[4]
+    var d14Wea = data_array[5]
     selectDay(d14Res,d14Wea)
   },false)
 }
 
 // Select subset of data depending on menu clicked.  
 function selectDay(results, weather){
-  sat = document.getElementById("zaterdag_select")
+  var sat = document.getElementById("zaterdag_select")
   sat.addEventListener("click", function(){
     var p = d3.select("#dag")
     p.html("Zaterdag")  
-    weather_day = []
+    var weather_day = []
     saturday(results, weather, weather_day)
   },false)
-  sund = document.getElementById("zondag_select")
+  var sund = document.getElementById("zondag_select")
   sund.addEventListener("click", function(){
     var p = d3.select("#dag")
     p.html("Zondag")  
     //clearWind();
-    weather_day = []
+    var weather_day = []
     sunday(results, weather, weather_day)
   },false)
 }
@@ -129,7 +142,7 @@ function saturday (results, weather, weather_day){
   for (var i = 0; i < (weather.length/2); i++){
     weather_day.push(weather[i])
   }
-  day_results = []
+  var day_results = []
   results.forEach(function(d) {
     d.temp = d[0]
     if (d.temp == "za" || d.temp == "za "){
@@ -152,7 +165,7 @@ function sunday (results, weather, weather_day){
   for (var i = 0; i < (weather.length/2); i++){
     weather_day.push(weather[13+i])
   }
-  day_results = []
+  var day_results = []
   results.forEach(function(d) {
     d.temp = d[0]
     if (d.temp == "zo" || d.temp == "zo "){
@@ -190,7 +203,7 @@ function clearSVG(){
 
 // Clear the wind arrow SVG.
 function clearWind(){
-  svg = d3.select("#wind")
+  var svg = d3.select("#wind")
   svg.remove()
 }
 
@@ -199,19 +212,19 @@ function selectType(results, day_results, weather_day, weather){
   clearSVG()
   initialise()
   //clearArray(results)
-  DataSelection = []
+  var DataSelection = []
   clearArray(DataSelection)
   DataSelection = []
-  vw = document.getElementById("select_voorwedstrijd")
+  var vw = document.getElementById("select_voorwedstrijd")
   vw.addEventListener("click", function(){
     var p = d3.select("#soort_wedstrijd")
     p.html("Voorwedstrijden")
     initialise()
-    DataSelection = []
+    var DataSelection = []
     clearArray(DataSelection)
     /*d3.json(day_results, function() {*/
     day_results.forEach(function(d) {
-      temp = d[2].slice(-6)
+      var temp = d[2].slice(-6)
       if (temp !== "finale"){
         DataSelection.push(d)
       }
@@ -219,16 +232,16 @@ function selectType(results, day_results, weather_day, weather){
     drawScatter(DataSelection, results, day_results, weather_day, weather)
   },true)
   
-  finale = document.getElementById("select_finales")
+  var finale = document.getElementById("select_finales")
   finale.addEventListener("click", function(){
     var p = d3.select("#soort_wedstrijd")
     p.html("Finales")
     initialise()
-    DataSelection = []
+    var DataSelection = []
     clearArray(DataSelection)
     /*d3.json(day_results, function() {*/
     day_results.forEach(function(d) {
-      temp = d[2].slice(-6)
+      var temp = d[2].slice(-6)
       if (temp === "finale"){
         DataSelection.push(d)
       }
@@ -236,12 +249,12 @@ function selectType(results, day_results, weather_day, weather){
     drawScatter(DataSelection, results, day_results, weather_day, weather)
   },true)
   
-  both = document.getElementById("select-beide")
+  var both = document.getElementById("select-beide")
   both.addEventListener("click", function(){
     var p = d3.select("#soort_wedstrijd")
     p.html("Voorwedstrijden & Finales")
     initialise()
-    DataSelection = []
+    var DataSelection = []
     clearArray(DataSelection)
     /*d3.json(day_results, function() {*/
     day_results.forEach(function(d) {
@@ -257,13 +270,13 @@ function selectType(results, day_results, weather_day, weather){
 // Draw the wind direction and update the wind div.
 function drawWindDirection(weather,weather_day){
   clearWind()
-  compass = d3.select("#compass")
+  var compass = d3.select("#compass")
     .style("opacity", "0")
-  svg = d3.select("#static_images").append("svg")
+  var svg = d3.select("#static_images").append("svg")
     .attr("id", "wind")
   // Get the width and height of the SVG to determine the middle.
-  width_wind = parseInt(svg.style("width"),10);
-  height_wind = parseInt(svg.style("height"),10);
+  var width_wind = parseInt(svg.style("width"),10);
+  var height_wind = parseInt(svg.style("height"),10);
 
   svg.append("image")
     .attr("id", "comp")
@@ -273,27 +286,27 @@ function drawWindDirection(weather,weather_day){
 
   var sum_direction = 0,
   sum_strength = 0,
-  sum_maxStrength = 0;
+  sum_maxStrength = 0,
   strengthMax = 0;
   for (var i = 0; i < weather_day.length; i++){
-    temp = weather_day[i]
-    direction = temp["Windrichting"].trim()
+    var temp = weather_day[i]
+    var direction = temp["Windrichting"].trim() % 360
     sum_direction += parseInt(direction,10)
-    strength = temp["Windsnelheid"].trim()
+    var strength = temp["Windsnelheid"].trim()
     sum_strength += parseInt(strength,10)
-    maxStrength = temp["Windstoot"].trim()
+    var maxStrength = temp["Windstoot"].trim()
     if (maxStrength > strengthMax){
       strengthMax = maxStrength*0.1
     }
     sum_maxStrength += parseInt(maxStrength,10)
   }
-  var avrDirection = ((sum_direction % 360)/weather_day.length),
-  avrStrength = (sum_strength/weather_day.length)
-  avrMaxStrength = (sum_maxStrength/weather_day.length)
-  avrStrength = roundToTwo(avrStrength*0.1)
+  var avrDirection = (sum_direction/weather_day.length)
+  var avrStrength = (sum_strength/weather_day.length)
+  var avrMaxStrength = (sum_maxStrength/weather_day.length)
+  var avrStrength = roundToTwo(avrStrength*0.1)
 
   // Define and rotate the main arrow depending on the average wind direction.
-  g = svg.append("g")
+  var g = svg.append("g")
     .attr("id", "windArrow")
   g.attr("transform", "rotate(" + avrDirection + "," + width_wind/2 + "," + height_wind/2 + ")")
   // Define arrow 
@@ -311,12 +324,12 @@ function drawWindDirection(weather,weather_day){
     .attr("stroke", "blue")
     .style("opacity", "1")
   
-  div = d3.select("#infoUpdate")
+  var div = d3.select("#infoUpdate")
   div.style("opacity", "1")
   div.html("Gemiddelde snelheid: <br>" + avrStrength + " m/s <br> Hardste windstoot: <br>" + strengthMax + " m/s <br>")
   
   // A second arrow is used to show hourly wind directions and is defined here. Rotation is done in redirectArrow.
-  optionalArrow = svg.append("g")
+  var optionalArrow = svg.append("g")
     .attr("class", "optionalArrow")
     .style("opacity", "0")
   optionalArrow.append("line")
@@ -338,17 +351,15 @@ function drawWindDirection(weather,weather_day){
 
 // Draw the actual graph.
 function drawScatter(DataSelection, results, day_results, weather_day, weather){
-  console.log(results.length)
-
   // Set properties of SVG like width, height.
   var margin = {top: 20, right: 20, bottom: 30, left: 50},
   width = 800 - margin.left - margin.right,
   height = 3000  - margin.top - margin.bottom;
   var padding = 50;
   var left_pad = 100;
-  graph = d3.select("#container_scatter")
+  var graph = d3.select("#container_scatter")
     .style("opacity", "1")
-  info = d3.select(".infobox")
+  var info = d3.select(".infobox")
     .style("opacity", "0")
 
   var svg = d3.select("#scatter_results").append("g")
@@ -383,12 +394,13 @@ function drawScatter(DataSelection, results, day_results, weather_day, weather){
   // Create the Axis for the graph.
   svg.append("g")
       .attr("class", "x axis")
-      //.attr("transform", "translate(0," + (-height) + ")")
+      .attr("transform", "translate(0, 20)")
       .call(xAxis)
     .append("text")
       .attr("class", "label")
-      .attr("y", -6)
-      .style("text-anchor", "end")
+      .attr("y", "-7")
+      .attr("x", "350")
+      .style("text-anchor", "left")
       .text("Baan");
 
   svg.append("g")
@@ -420,18 +432,18 @@ function drawScatter(DataSelection, results, day_results, weather_day, weather){
     .on("mouseout", function(d){
       hideCrewTooltip()
     })
-  eventlistener(results, weather_day)
+  eventlistener(results, weather_day, DataSelection)
 })
 }
 
 // Listen for mouse events.
 var bisectDate = d3.bisector(function(d) { return d.startTijd; }).left;
-function eventlistener(results, weather_day){
-  tooltip = d3.select("#tooltip")
+function eventlistener(results, weather_day, DataSelection){
+  var tooltip = d3.select("#tooltip")
     .style("opacity", "0")
-  point = d3.selectAll(".dot")
+  var point = d3.selectAll(".dot")
     .on("mouseover", function(){
-      crew = d3.select(this)
+      var crew = d3.select(this)
       showCrewTooltip()
       updateCrewTooltip(DataSelection, crew, event);
     })
@@ -447,25 +459,34 @@ function eventlistener(results, weather_day){
   var xDomain = d3.extent(DataSelection, function(d) { return d.baan; });
   var yDomain = d3.extent(DataSelection, function(d) { return d.startTijd; })
 
-  var xScale = d3.scale.linear().range([padding, width - padding]).domain(xDomain);
-  var yScale = d3.time.scale().range([padding, height - padding]).domain(yDomain);
+  var xScale = d3.scale.linear().range([padding, width - padding]).domain(xDomain).nice();
+  var yScale = d3.time.scale().range([padding, height - padding]).domain(yDomain).nice();
 
   // Get the mouse coördinates if mouse is moved on scatter plot
   var svg = d3.select("#scatter_results")
   svg.on('mousemove', function() {
-    coordinates = d3.mouse(this)
+    var coordinates = d3.mouse(this)
     var xsvg = coordinates[0]
     var ysvg = coordinates[1]
 
     // transform the coordinates to a time
-    var mouseTime = yScale.invert(ysvg),
-    i = bisectDate(DataSelection, mouseTime)
-    if (undefined !== i){
-      updateHeatTooltip(i, DataSelection)
-    }
+    var mouseTime = yScale.invert(ysvg)
     // Use only the hours value of time for redirection of arrow.
-    timeslot = mouseTime.getHours()
+    var timeslot = mouseTime.getHours()
     redirectArrow(timeslot,weather_day)
+    var parseTime = d3.time.format("%H:%M")
+    var z = parseTime(mouseTime)
+    
+    var i = bisectDate(DataSelection, mouseTime)
+    var d0 = DataSelection[i - 1]
+    var d1 = DataSelection[i];
+    // work out which date value is closest to the mouse
+    var d = mouseTime - d0[1] > d1[1] - mouseTime ? d1 : d0;
+    mouseTime = d  
+
+    if (undefined !== i){
+      updateHeatTooltip(i,d, DataSelection)
+    }
     mouseMoved()
   })
   svg.on("mouseleave", function(){
@@ -477,10 +498,17 @@ function eventlistener(results, weather_day){
 // Rotates arrow in the compass to show hourly wind directions.
 function redirectArrow(timeslot,weather_day){
   for (var i = 0; i < weather_day.length; i++){
-    temp = weather_day[i]["Tijd"].trim()
+    var temp = weather_day[i]["Tijd"].trim()
+    var svg = d3.select("#static_images").append("svg")
+      .attr("id", "wind")
+    // Get the width and height of the SVG to determine the middle.
+    var width_wind = parseInt(svg.style("width"),10);
+    var height_wind = parseInt(svg.style("height"),10);
+
+
     if (+temp === (+timeslot + 1)){
-      direction = +weather_day[i]["Windrichting"].trim()
-      arrow = d3.select(".optionalArrow")
+      var direction = +weather_day[i]["Windrichting"].trim()
+      var arrow = d3.select(".optionalArrow")
         .style("opacity", "1")
         .transition()
         .duration(500)
@@ -490,7 +518,7 @@ function redirectArrow(timeslot,weather_day){
       var strength = (+weather_day[i]["Windsnelheid"].trim())*0.1
       var maxStrength = (+weather_day[i]["Windstoot"].trim())*0.1
 
-      div = d3.select("#updateHour")
+      var div = d3.select("#updateHour")
         .style("opacity", "1");
       div.html("Gemiddelde snelheid: <br>" + strength + " m/s <br> Hardste windstoot: <br>" + maxStrength + " m/s <br>") 
 
@@ -522,27 +550,30 @@ function hideCrewTooltip(event){
 // Change content of Crew tooltip.
 function updateCrewTooltip(day_results, crew, event){
   // Use the (in eventlistener) selected data point.
-  info = crew.node().__data__;
+  var info = crew.node().__data__;
   var div = d3.select("#crew_tooltip")
 
   // Get all the variables for display in the tooltip.
-  tijd = info[1]
-  crewname = info[3]
-  lane = info[4]
+  var tijd = info[1]
+  var heat = info[2]
+  var crewname = info[3]
+  var lane = info[4]
 
-  pos500 = info[5]["results"]["500m"]["position"]
-  time500 = info[5]["results"]["500m"]["time"]
+  var pos500 = info[5]["results"]["500m"]["position"]
+  var time500 = info[5]["results"]["500m"]["time"]
   
-  pos1000 = info[5]["results"]["1000m"]["position"]
-  time1000 = info[5]["results"]["1000m"]["time"]
+  var pos1000 = info[5]["results"]["1000m"]["position"]
+  var time1000 = info[5]["results"]["1000m"]["time"]
 
-  pos1500 = info[5]["results"]["1500m"]["position"]
-  time1500 = info[5]["results"]["1500m"]["time"]
+  var pos1500 = info[5]["results"]["1500m"]["position"]
+  var time1500 = info[5]["results"]["1500m"]["time"]
 
-  posFinish = info[5]["results"]["finish"]["position"]
-  timeFinish = info[5]["results"]["finish"]["time"]
+  var posFinish = info[5]["results"]["finish"]["position"]
+  var timeFinish = info[5]["results"]["finish"]["time"]
 
   // Add the info to the tooltip
+  var div = d3.select("#tooltipTitle")
+  div.html(heat + "<br>") 
   var div = d3.select("#tijd_crew")
   div.html("Starttijd: " + tijd)  
   var div = d3.select("#ploeg_tooltip")
@@ -568,28 +599,36 @@ function showTooltip(event){
 }
 
 // update the content of the tooltip for an entire heat.
-function updateHeatTooltip(i,day_results){
-    heat = []
-    d = DataSelection[i]
-    starttijd = d.startTijd
-    field = d[2]
+function updateHeatTooltip(i,d,day_results){
+    var heat = []
+    var f = day_results[i]
+
+    var starttijd = f.startTijd
+    var field = f[2]
     for (var x = 0; x < 6; x+=1) {
-      ploeg_heat = day_results[i-x]
-      ploeg2_heat = day_results[i+x]
+      if (i >= 6){
+        var ploeg_heat = day_results[i-x]
+      }
+      else{
+        while (i - x >0){
+          var ploeg_heat = day_results[i-x]
+        }
+      }
+      var ploeg2_heat = day_results[i+x]
       if (ploeg_heat[2] === field)
         crewExists(ploeg_heat, heat)
       if (ploeg2_heat[2] === field)
         addCrew(ploeg2_heat, heat)
     }
-    baan = []
+    var baan = []
     for (var j = 0; j < heat.length; j++){
-      ploeg_overview = heat[j]
+      var ploeg_overview = heat[j]
       // Get the time of the winning crew
-      position = ploeg_overview[5]["results"]["finish"]["position"]
+      var position = ploeg_overview[5]["results"]["finish"]["position"]
       if (position == 1)
         var time = ploeg_overview[5]["results"]["finish"]["time"]
       //get the crewname for the appropriate lanes
-      lane = ploeg_overview[4]
+      var lane = ploeg_overview[4]
       if (lane == 1)
         baan[0] = ploeg_overview[3]
       if (lane == 2)
@@ -610,7 +649,7 @@ function updateHeatTooltip(i,day_results){
     
     // Set the crewname for a undefined crew in a lane to ----- for nicer display later on.
     for (var j = 0; j < 8; j++){
-      temp = baan[j]
+      var temp = baan[j]
       if (typeof temp == "undefined"){
         baan[j] = " ----- "
       }

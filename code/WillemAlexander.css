@@ -49,7 +49,7 @@ table {
 
 body {
   background-position: center;
-  background-color: #47D147;
+  background-color: #66FF66;
   /*width: auto;*/
   min-width: 960px;
   max-width: 1280px;
@@ -71,7 +71,7 @@ body header{
   height: 20%;
   margin: 0 auto;
   border:1px solid #CCC;
-  background-color: #47D147;
+  background-color: #66FF66;
   /*z-index: 1;*/
 }
 
@@ -142,13 +142,13 @@ cursor: pointer;
 }
 
 header ul li{
-background-color: #A1E7A1;
-border-left: 3px solid #47D147;
+background-color: #E5F8E5;
+border-left: 3px solid #66FF66;
 }
 
 header ul ul li{
-background-color: #A1E7A1;
-border-top: 3px solid #47D147;
+background-color: #E5F8E5;
+border-top: 3px solid #66FF66;
 border-left: 0;
 }
 
@@ -280,11 +280,11 @@ aside .container{
 
 aside .container #tooltip {   
   position: absolute; 
-  /*top: 40%;*/
-  right: 1%;  
+  padding: 2%;
+  left: 1%;  
   margin: 5%;        
   text-align: center;           
-  width: 45%; 
+  width: 43%; 
   height: 44%;  
   margin: 0 1%;       
   font: 18px sans-serif;        
@@ -306,11 +306,11 @@ aside .container #tooltip #tijd_tooltip{
 
 aside .container #crew_tooltip {   
   position: absolute; 
-  /*top: 40%;*/
-  left: 1%;  
+  padding: 2%;
+  right: 1%;  
   margin: 5%;          
   text-align: center;           
-  width: 45%; 
+  width: 43%; 
   height: 44%;       
   margin: 0 1%;          
   /*max-height: 500px;              
@@ -345,7 +345,7 @@ body section{
   width: 65%;
   height: 345%;
   margin: 5% 0;
-  background-color: #47D147;
+  background-color: #66FF66;
   /*border:1px solid #CCC;*/
 }
 body section .infobox{
@@ -365,7 +365,7 @@ body section #container_scatter {
   min-width: 400px;
   max-width: 80%;
   /*height: 3000px; */
-  background-color: #A1E7A1;
+  background-color: #E5F8E5;
   opacity: 0;
   margin: 0 auto;
   padding: auto;
