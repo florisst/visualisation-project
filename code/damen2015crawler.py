@@ -27,6 +27,7 @@ def scrape_heat_urls(dom):
 
 def scrape_heats(heat_urls):
     heats = []
+    # Two tables are scraped
     for index in range(0,2):
         dag = heat_urls[index]
         for i, url in enumerate(dag):
@@ -49,16 +50,19 @@ def scrape_heats(heat_urls):
                     # Skip crews who did not start the race.
                     if (row.by_tag("td")[0].content != ""):
                         crew = row.by_tag("td")[2].by_tag("a")[0].content
+                        
                         k = 3
                         # some pages have an extra td element with irrelevant data, so we increment k by one.
                         if (len(chart.by_tag("tr")[1]) > 9):
                             k += 1
+                        
                         lane = row.by_tag("td")[k].content[1:2]
                         k += 1
                         interval = {}
                         interval_500 = {}
                         interval["500m"] = interval_500
                         interval_500["time"] = row.by_tag("td")[k].content
+                        
                         k += 1
                         interval_500["position"] = row.by_tag("td")[k].content[1:2]
                         k += 1
@@ -66,6 +70,7 @@ def scrape_heats(heat_urls):
                         interval_1000 = {}
                         interval["1000m"] = interval_1000
                         interval_1000["time"] = row.by_tag("td")[k].content
+                        
                         k += 1
                         interval_1000["position"] = row.by_tag("td")[k].content[1:2]
                         k += 1
@@ -73,6 +78,7 @@ def scrape_heats(heat_urls):
                         interval_1500 = {}
                         interval["1500m"] = interval_1500
                         interval_1500["time"] = row.by_tag("td")[k].content
+                        
                         k += 1
                         interval_1500["position"] = row.by_tag("td")[k].content[1:2]
                         k += 1
@@ -80,8 +86,10 @@ def scrape_heats(heat_urls):
                         finish = {}
                         interval["finish"] = finish
                         finish["time"] = row.by_tag("td")[k].content
+                        
                         k += 1
                         finish["position"] = row.by_tag("td")[k].content[1:2]
+                    
                     results = {}
                     results["results"] = interval
                     heat.append(day)
