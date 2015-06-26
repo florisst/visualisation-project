@@ -4,7 +4,7 @@
 
 Het doel van de visualisatie is bekijken of de afgelopen drie wedstrijden die zijn verroeid op de Willem Alexander Baan eerlijk zijn verlopen zonder sprake van voordeel- of nadeelbanen.
 
-![home](doc/home.png =250x)
+![home](doc/home.png)
 ![selectie1](doc/selectie1.png)
 ![selectie2](doc/selectie2.png)
 ![selectie3](doc/selectie3.png)
