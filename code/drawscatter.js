@@ -133,15 +133,22 @@ function selectDay(results, weather){
   var sat = document.getElementById("zaterdag_select")
   sat.addEventListener("click", function(){
     var p = d3.select("#dag")
-    p.html("Zaterdag")  
+    p.html("Zaterdag")
+    
+    var p = d3.select("#soort_wedstrijd")
+    p.html("soort wedstrijd gekozen")  
+    
     var weather_day = []
     saturday(results, weather, weather_day)
   },false)
   var sund = document.getElementById("zondag_select")
   sund.addEventListener("click", function(){
     var p = d3.select("#dag")
-    p.html("Zondag")  
-    //clearWind();
+    p.html("Zondag")
+    
+    var p = d3.select("#soort_wedstrijd")
+    p.html("soort wedstrijd gekozen")  
+    
     var weather_day = []
     sunday(results, weather, weather_day)
   },false)
@@ -329,7 +336,7 @@ function drawWindDirection(weather,weather_day){
   // Add an image of a compass to the svg
   svg.append("image")
     .attr("id", "comp")
-    .attr("xlink:href", "images/compass.png")
+    .attr("xlink:href", "images/compass2.png")
     .attr("width", width_wind)
     .attr("height", height_wind)
 
@@ -447,7 +454,7 @@ function drawScatter(DataSelection, results, day_results, weather_day, weather){
     .append("text")
       .attr("class", "label")
       .attr("y", "-7")
-      .attr("x", "350")
+      .attr("x", "250")
       .style("text-anchor", "left")
       .text("Baan");
 
@@ -503,21 +510,19 @@ function eventlistener(results, weather_day, DataSelection,yDomain,yScale){
   svg.on('mousemove', function() {
     var coordinates = d3.mouse(this)
     var xsvg = coordinates[0]
-    var ysvg = coordinates[1]
+    var ysvg = coordinates[1] - 10;
 
     // transform the coordinates to a time
     var mouseTime = yScale.invert(ysvg)
+
     // Use only the hours value of time for redirection of arrow.
     var timeslot = mouseTime.getHours()
     redirectArrow(timeslot,weather_day)
-    var parseTime = d3.time.format("%H:%M")
     
-    var i = bisectDate(DataSelection, mouseTime) - 3
+    var i = bisectDate(DataSelection, mouseTime)
     var d = mouseTime 
 
-    if (undefined !== i){
-      updateHeatTooltip(i,d, DataSelection)
-    }
+    updateHeatTooltip(i,d, DataSelection)
     mouseMoved()
   })
   svg.on("mouseleave", function(){
@@ -641,17 +646,26 @@ function updateHeatTooltip(i,d,day_results){
     var starttijd = f.startTijd
     var field = f[2]
 
+    // get all the data points in the same heat as f is.
     for (var x = 0; x < 6; x++) {
-      var temp = i - x,
-      temp2 = i + x;
-      var ploeg_heat = day_results[temp]
-      var ploeg2_heat = day_results[temp2]
-        
-      if (ploeg_heat[2] === field){
-        addCrew(ploeg_heat, heat)
+      if (i < 6){
+        var temp = i + x;
+        var ploeg_heat = day_results[temp]
+        if (ploeg_heat[2] === field){
+          addCrew(ploeg_heat, heat)
+        }
       }
-      if (ploeg2_heat[2] === field){
-        addCrew(ploeg2_heat, heat)
+      else{
+        var temp = i - x,
+        temp2 = i + x;
+        var ploeg_heat = day_results[temp]
+        var ploeg2_heat = day_results[temp2]
+        if (ploeg_heat[2] === field){
+          addCrew(ploeg_heat, heat)
+        }
+        if (ploeg2_heat[2] === field){
+          addCrew(ploeg2_heat, heat)
+        }
       }
     }
     var baan = []

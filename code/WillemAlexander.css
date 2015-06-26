@@ -56,15 +56,7 @@ body {
   height: auto;
 }
 
-/*body header{
-  position: fixed;
-  width: 65%;
-  height: 20%;
-  margin: 0 auto;
-  border:1px solid #CCC;
-  background-color: #47D147;
-  z-index: 1;
-}*/
+
 body header{
   position: absolute;
   width: 65.1%;
@@ -72,7 +64,7 @@ body header{
   margin: 0 auto;
   border:1px solid #CCC;
   background-color: #66FF66;
-  /*z-index: 1;*/
+
 }
 
 header #title{
@@ -259,8 +251,6 @@ aside #static_images #wind{
   width: 50%;
   height: 50%;
   margin: 5%;
-  /*background-color: white;
-  opacity: 1;*/
 }
 
 aside #static_images #course{
@@ -294,7 +284,6 @@ aside .container #tooltip {
   border-style: solid;  
   border-radius: 25px;
   opacity: 0;
-  pointer-events: none;
 }
 aside .container #tooltip #banen_tooltip{
   text-align: left;
@@ -312,9 +301,7 @@ aside .container #crew_tooltip {
   text-align: center;           
   width: 43%; 
   height: 44%;       
-  margin: 0 1%;          
-  /*max-height: 500px;              
-  padding: 2px; */            
+  margin: 0 1%;                     
   font: 18px sans-serif;        
   background: #ccff00;   
   border: 2px;
@@ -346,7 +333,6 @@ body section{
   height: 345%;
   margin: 5% 0;
   background-color: #66FF66;
-  /*border:1px solid #CCC;*/
 }
 body section .infobox{
   position: absolute;
@@ -364,20 +350,16 @@ body section #container_scatter {
   right: 25%;
   min-width: 400px;
   max-width: 80%;
-  /*height: 3000px; */
   background-color: #E5F8E5;
   opacity: 0;
   margin: 0 auto;
-  padding: auto;
 }
 body section #container_scatter #scatter_results {
-  padding: auto;
-  vertical-align: center;
   margin: auto;
 }
 body section #conclusie{
   position: relative;
-  top: 3000px;
+  top: 2000px;
   margin: 4% 5%;
   padding: 3%;
   border:2px solid black;

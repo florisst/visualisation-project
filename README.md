@@ -1,66 +1,22 @@
-# De eerlijkheid van de Willem-Alexander roeibaan nabij Rotterdam
-Dit is mijn inzending voor het vak Programmeerproject 2015.  
-Floris Stevens. 	
-10182195
+# De eerlijkheid van de Willem-Alexander roeibaan nabij Rotterdam #
 
-##Idee##
+## Het doel van de visualisatie ##
 
-####Hoe eerlijk is de Willem-Alexander baan?####
-Bij roeien is een wedstrijd-baan opgedeeld in verschillende start banen, waar je met maximaal 6 ploegen naast elkaar start krijgt iedere ploeg zijn eigen baan toegewezen. In de roeiwereld wordt veel gepraat over zogeheten "voordeelbanen", waar je voordeel zou kunnen ondervinden van de wind en/of stroming, waar je in een andere baan dit voordeel niet hebt en zelfs een nadeel zou kunnen hebben.  Recent is er een nieuwe roeibaan in Nederland aangelegt, de Willem-Alexander baan. Deze baan is niet alleen qua faciliteiten een verbetering op de in Amsterdam gelegen Bosbaan, hij zou ook een stuk eerlijker zijn dan laatstgenoemde. Van de Bosbaan wordt gezegd dat het weer zeer veel invloed heeft op de stroming van het water in de  verschillende banen, bij de nieuwe Willem-Alexanderbaan zou dit effect niet zo groot zijn.
+Het doel van de visualisatie is bekijken of de afgelopen drie wedstrijden die zijn verroeid op de Willem Alexander Baan eerlijk zijn verlopen zonder sprake van voordeel- of nadeelbanen.
 
-De site van de Willem-Alexander baan zegt zelf:
-"De roeibaan als geheel ligt open onder de hemel, alleen omringd door kleine rietlanden. De wind heeft er weliswaar vrij spel, maar treft alle banen even hard. Het maakt de Willem Alexander Baan tot een eerlijke wedstrijdbaan."
-
-Ik ben benieuwd in hoeverre dit correct is. Is de Willem-Alexander baan echt zo eerlijk als dat ze zelf beweren of is de baan in feite, net als
-de Bosbaan, zeer beinvloedbaar door de wind.
-
-##Verschillende onderdelen##
-Schets van de hoofd visualisatie
-![dag grafiek](doc/schets_dag.jpg)
-
-1. HTML pagina
-  * Met apart CSS bestand voor de stijl
-  * Baan kaart bovenaan (statisch)
-2. Windroos
-  * Windrichting van de dag, afhankelijk van de gekozen dag bij punt 3.
-  * Wind snelheid, afhankelijk van gekozen dag bij punt 3.
-  * Wind informatie onder de roos weergegeven, de gemiddelde snelheid en richting die dag plus maximale windstoot. 
-3. Keuze menu voor verschillende velden
-  * Kies wedstrijd (Westelijke 2015/Damen 2015/ Damen 2014)
-  * Kies dag (Zaterdag/Zondag/beide)
-  * Kies soort wedstrijd (voorwedstrijden, finales of beide)
-4. Grafieken die weergeeft in welke laan de winnende ploeg lag, per heat.
-
-Omdat alleen bij de voorwedstrijden de baan indeling volledig random geloot wordt, zal ik beginnen met het verwerken van alleen de voorwedstrijden van alle velden. Ploegen die winnen in de voorwedstrijd mogen in de finale in de gunstigste baan starten en dus zou dit een vertekend beeld kunnen geven. Wel Zou ik dit graag ook nog opnemen in een grafiek. Misschien dat het keuze menu uitgebreidt moet worden met een optie voor het soort wedstrijd (Voorwedstrijden, finales of beiden) waarna de gevraagde specificatie getekend wordt.  
-Als de muis over een punt in de scater plot gaat zal een tooltip verschijnen waarin de ploegnaam, behaalde plaats en gevaren tijd worden weergegeven. Als de muis over het gebied gaat waar een heat in weergegeven wordt zal een tooltip moeten opkomen wie weergeeft welke heat dit is, welke ploegen er starten en in welke laan deze liggen. Zodra er op geklikt wordt zal een nieuwe visualisatie getekend moeten worden waarin van dat veld een voortgangs grafiek wordt getekend, Zoals hier onder schematisch weergegeven.
-
-![veld grafiek](doc/schets_veld.jpg)
+![home](doc/home.png =250x)
+![selectie1](doc/selectie1.png =250x)
+![selectie2](doc/selectie2.png =250x)
+![selectie3](doc/selectie3.png =250x)
+![selectie4](doc/selectie4.png =250x)
 
 
-##Platform en externe componenten##
-Een HTML pagina zal worden gemaakt waar d3 en Javascript zullen worden gebruikt om een visualisatie zichtbaar te maken. De hoofd visualisatie zal een scatterplot zijn waarbij elk bolletje een gefinishte ploeg voorstelt. De verschillende banen zullen worden uitgezet zodat snel kan worden gezien in welke baan het meest is gewonnen over de hele dag gezien (zie de schets van de hoofd visualisatie).
+##Floris Stevens##
 
-##Benodigde data##
-Om de vraag te kunnen beantwoorden hoe eerlijk de Willem-Alexander baan nou is moet er natuurlijk weersdata zijn en roeiuitslagen nodig
+public domain release
 
-De weersdata zal worden gedownload van http://www.knmi.nl/klimatologie/uurgegevens/selectie.cgi voor weersstation Rotterdam waar de Richting van
-de wind en de snelheid de belangrijkste variabelen zijn.  
-  1.	23 & 24 mei 2015 (Westelijke)
-  2.	 2 &  3 mei 2015 (Damen 2015)
-  3.	 3 &  4 mei 2014 (Damen 2014).
+#### Content van derden ####
+Het kompas in de rechterbovenhoek is van http://www.clipartpanda.com.
+De afbeelding zelf is een aangepaste versie van http://www.clipartpanda.com/clipart_images/drawing-compass-clip-art-40693720.
 
-De roeiuitslagen zullen worden gescraped van time-team.nl.  
-  1.	Westelijke 2015
-  2.	Damen 2015
-  3.	Damen 2014.
-
-Uiteindelijke visualisatie zal met behulp van D3 gemaakt worden en dus zal de data waarschijnlijk omgezet worden in JSON formaat.
-De uitslagen bevatten veel informatie en in elkgeval de starttijd, de loting over de banen, de tussentijden, de tussenstanden en de finish volgorde en tijd zullen worden opgeslagen.
-
-
-##Mogelijke problemen##
-Het Crawlen van alle resultaten is al een redelijke klus, het lijkt me daarom voldoende om enkel de gekozen drie wedstrijden te doen. Mocht het echter passen wil ik kijken of ik het nog kan uitbreiden naar meer wedstrijden.
-
-Moeilijkheid in het keuze menu waar een wedstrijd, een dag en het soort wedstrijd gekozen kan worden. De juiste data moet hier dan bijgepakt worden. Ik heb nog geen ervaring met zo'n splitsing in data.
-
-De interactieve aspecten zijn de tooltip met wisselende inhoud die moet verschijnen/verdwijnen. en het geannimeerd uitklappen van de voortgangs grafieken van een heel veld als er in de grafiek op een heat geklikt wordt. Mocht er ruimte zijn wil ik hier meer interactie inbouwen.
+De baankaart die eveneens in de rechterbovenhoek staat is een screenshot van google maps.
