@@ -4,7 +4,7 @@
 '''
 This script scrapes the time-team.nl website and outputs results in a JSON file with the starting time, crew names, lanes and results
 '''
-import csv, json
+import json
 from pattern.web import URL, DOM, plaintext, abs
 
 TARGET_URL = "http://regatta.time-team.nl/raceroei/2014/results/heats.php"
@@ -27,9 +27,10 @@ def scrape_heat_urls(dom):
 
 def scrape_heats(heat_urls):
     heats = []
+    # Two tables are scraped one for saturday results the other for sundays
     for index in range(0,2):
-        dag = heat_urls[index]
-        for i, url in enumerate(dag):  
+        heat_results = heat_urls[index]
+        for i, url in enumerate(heat_results):  
             heat_html = URL(url).download(cached=True)
             # Extract relevant information for each heat
             heat_dom = DOM(heat_html)
